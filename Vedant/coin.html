@@ -1,0 +1,49 @@
+<DOCTYPE!>
+<html>
+  <head>
+    <title>Coin Flip</title>	
+  </head>
+  <body>
+    <script>		
+	var heads = 0;
+        var tails = 0;
+        var counter = 1;
+        var r = 0.0;
+         
+        var flips = prompt("Number of times the coin to be flipped");
+	
+	if(flips>0)
+          {	
+         
+           while(counter <= flips)
+             {
+               r = Math.random();
+               console.log(counter + "\t" + r);
+               
+               if(r < 0.5)
+                 {
+                   tails++;
+                   console.log("\t Result is tails");
+                 }
+               else
+                 {
+                   heads++;
+                   console.log("\t Result is heads");
+                 }
+               counter++;      
+             }
+	   var h = (heads/flips)*100;
+	   var ph = h.toFixed(3);
+	   var t = (tails/flips)*100;
+	   var pt = t.toFixed(3);
+	   console.log('Percentage of heads v/s tails is' + ' ' + ph + ' ' + pt); 
+	  }
+	else
+          {
+	    alert("Please enter a number greater than 0");
+	    location.reload();	
+	  }		 
+    
+    </script>
+  </body>
+</html>
