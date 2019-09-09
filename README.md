@@ -1,1 +1,1 @@
-# Javascript
+Different java and javascript programs.
