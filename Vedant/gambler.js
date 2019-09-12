@@ -1,5 +1,5 @@
 var stake = 500;
-var goal = 600;
+var goal = 1000;
 var n = 50;
 var bets = 0;
 var wins = 0;
@@ -17,7 +17,6 @@ for(i=0;i<n;i++)
 			cash--;
 		}
 	}
-	console.log(cash);
 	if(cash == goal)
 	{
 		wins++;
@@ -25,6 +24,6 @@ for(i=0;i<n;i++)
 }
 var avg = (wins/n)*100;
 var avgbet = 1*bets/n;
-console.log(wins + 'times' + n);
+console.log('Won '+ wins + ' times out of ' + n);
 console.log(avg);
 console.log(avgbet);

@@ -12,5 +12,6 @@ function Prime()
 	 n--;
 	}
 	console.log(str);
+	return str;
 }
 Prime();
