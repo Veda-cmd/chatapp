@@ -1,8 +1,9 @@
 var src = require('../Vedant/utility/util.js');
+var test = require('./test/primeTest.js');
 
 function Prime()
 {
-	var n=src.input();
+	var n=parseInt(src.input());
 	var str = "";
 	while(n>-1 && n<1000)
 	{
@@ -12,6 +13,5 @@ function Prime()
 	 n--;
 	}
 	console.log(str);
-	return str;
 }
 Prime();

@@ -1,9 +1,10 @@
-const assert = require('chai').assert;
-const app = require('../utility/util.js').isPrime;
+var src = require('../utility/util.js');
+var assert = require('assert');
 
-let primeResult=isPrime();
-describe("Prime Number testing",function(){
-	it("Input should be a number", function(){
-		assert.typeOf(primeResult,'number');
+describe('ANAGRAM TESTING',function(){
+	it('Inputs entered are not strings', function (){
+    assert.equal(false,src.anagram(false));
 	});
+
 });
+

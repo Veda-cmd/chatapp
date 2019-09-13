@@ -18,25 +18,24 @@
            while(counter <= flips)
              {
                r = Math.random();
-               console.log(counter + "\t" + r);
+               document.write(counter + "\t");
                
                if(r < 0.5)
                  {
                    tails++;
-                   console.log("\t Result is tails");
+                   document.write("\t Result is tails <br>");
                  }
                else
                  {
                    heads++;
-                   console.log("\t Result is heads");
+                   document.write("\t Result is heads <br>");
                  }
                counter++;      
              }
-	   var h = (heads/flips)*100;
-	   var ph = h.toFixed(3);
-	   var t = (tails/flips)*100;
-	   var pt = t.toFixed(3);
-	   console.log('Percentage of heads v/s tails is' + ' ' + ph + ' ' + pt); 
+	   var h = parseInt((heads/flips)*100);
+	   var t = parseInt((tails/flips)*100);
+	   document.write('<br> Percentage of heads is '+ h);
+     document.write('<br> Percentage of tails is '+ t);  
 	  }
 	else
           {

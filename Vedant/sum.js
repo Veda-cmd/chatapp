@@ -1,3 +1,5 @@
+var prompt = require('prompt');
+
 var inputArray = [];
 var size = prompt('Enter size of array'); 
 

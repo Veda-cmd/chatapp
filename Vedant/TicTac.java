@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class TicTac
+
 {
 	public static void main(String args[])
 	{
@@ -24,6 +25,7 @@ public class TicTac
 }
 
 class TicTacToe
+
 {
 	public static final int X = 1, O = -1;
 	public static final int EMPTY = 0;

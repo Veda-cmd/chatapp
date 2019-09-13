@@ -7,7 +7,7 @@ const writeFile = util.promisify(fs.writeFile);
 async function main()
 {
 	
-	const fileContent = await readFile("../100MB.txt","utf-8")
+	const fileContent = await readFile("../../100MB.txt","utf-8")
 	.catch(err =>
  	({
  	msg:"Error in reading file", error: err,
