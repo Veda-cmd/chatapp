@@ -1,41 +1,59 @@
-var prompt = require('prompt');
+/**********************************************************************************************
+*Execution    :  default node     cmd> node sum.js 
+*
+*Purpose      :  To determine if sum of 3 elements in array adds to zero.
+*
+*@description  
+*
+*@file        :  sum.js
+*@overview    :  sumOfTriplets module to determine if sum of 3 elements in array adds to zero.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+***********************************************************************************************/ 
 
-var inputArray = [];
-var size = prompt('Enter size of array'); 
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var imports another file for execution of program.
+*/
 
-for(var i=0; i<size; i++) 
+var src = require('../Vedant/utility/util.js');
+
+/**
+*@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
+*it is created. The function prints the output of the program.
+*/
+
+(function sumOfTriplets()
 {
-	inputArray[i] = prompt('Enter Element ' + (i+1));
-}
+	/**
+	*@description Takes inputs for the program.
+	*@var {Number} size, {Array} inputArray.
+	*/
 
-inputArray.sort(function(a, b) 
-{
-  return a - b;
-});
-
-for(var j=0;j<size-1;j++)
-{
-	var first = parseInt(inputArray[0]);
-	var low = j+1;
-	var high = size - 1;
-	var sum = first + parseInt(inputArray[low]) + parseInt(inputArray[high]);
-	while(low<high)
+	console.log('Enter size of array');
+	var size = src.inputInt(); 
+	console.log('Enter elements of array');
+	var inputArray = [];
+	for(var i=0; i<size; i++) 
 	{
-		if(sum == 0)
-		{
-			console.log(first,inputArray[low],inputArray[high]);
-			low++;
-			high--;
-		}
-		else if(sum < 0)
-		{
-			low++;
-		}
-		else
-		{
-			high--;
-		}
+		inputArray[i] = src.inputInt();
 	}
-}
 
+	/**
+	*@description A compare function is used to sort the input array.
+	*/
 
+	inputArray.sort(function(a, b) 
+	{
+	  return a - b;
+	});
+
+	/**
+	*@description Stores output for the program returned by called function from another file.
+	*@var {Boolean} result.
+	*/
+	
+	var result = src.sumOFElement(inputArray,size);
+	if (result== false) 
+	    console.log(" No Triplet Found");
+})();

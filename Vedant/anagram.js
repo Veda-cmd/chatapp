@@ -17,7 +17,6 @@
 */ 
 
 var src = require('../Vedant/utility/util.js');
-var test = require('./test/primeTest.js');
 /**
 *@description Function checks whether the given inputs are anagram or not.
 */

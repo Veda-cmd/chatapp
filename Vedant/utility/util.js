@@ -5,8 +5,11 @@ module.exports ={
 
 	inputInt: function()
 	{	
-		let val = parseInt(rl.question("Input:"));
-		return val;
+		let val = Number(rl.question("Input an number:"));
+		if(!isNaN(val))
+			return val;
+		else
+			console.log('Input should be a valid number');
 	},
 
 	inputStr: function()
@@ -14,6 +17,8 @@ module.exports ={
 		let val = rl.question("Input:");
 		if(isNaN(val))
 			return val;
+		else
+			console.log('Input should be a valid string');
 	},
 
     anagram: function(str1,str2)
@@ -44,6 +49,8 @@ module.exports ={
 
 	isPrime: function(n)
 	{	
+		if (isNaN(n))
+			return -1;
 		var m = n/2,flag=0;			
 		for(var i=2;i<=m;i++)
 		{
@@ -137,7 +144,7 @@ module.exports ={
 
 	primeFactors: function(n)
 	{	var string = "";
-		if(n % 2 == 0)
+		while (n % 2 == 0)
 		{
 			string+= 2+" ";
 			n=parseInt(n/2);
@@ -156,7 +163,110 @@ module.exports ={
 		if(n>2)
 			string+=n;
 		return string;
+	},
 
+	gambler: function(s,g,n)
+	{	
+		var bets = 0;
+		var wins = 0;
+		for(i=0;i<n;i++)
+		{
+			var cash = s;
+			while(cash>0 && cash<g)
+			{
+				bets++;
+				if(Math.random() < 0.5)
+					cash++;
+				else
+					cash--;
+			}
+			if(cash == g)
+				wins++;	
+		}
+		return wins;
+	},
+
+	powerOfTwo: function(n)
+	{
+		var num = "";
+		if( n>0 && n<31)
+		{
+			for(var i = 0;i<=n;i++)
+			{
+				var p = Math.pow(2,i);
+				num+= p +" ";	
+			}
+		}
+		return num;
+	},
+
+	arrayTwoD: function(m,n)
+	{	
+
+		var src = require('./util.js');
+		var i,j;
+		var intArray = [m][n];
+		console.log(typeof intArray);
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+				intArray[i][j]=src.inputInt();
+		}
+
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+				console.log(intArray[i][j]);
+		}
+		
+
+		var doubleArray = new Array(m,n);
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+				doubleArray[i][j]=src.inputInt();
+		}
+		console.log(doubleArray);
+
+		var booleanArray = new Array(m,n);
+		for(i=0;i<m;i++)
+		{
+			for(j=0;j<n;j++)
+				booleanArray[i][j]=src.inputInt();
+		}
+		console.log(booleanArray);
+	},
+
+	sumOFElement: function(arr,n)
+	{
+		var boolean = false;
+		for(var j=0;j<n-1;j++)
+		{
+			var first = arr[j];
+			var low = j+1;
+			var high = n - 1;
+
+			while(low<high)
+			{
+				var sum = first + arr[low] + arr[high];
+				if(sum == 0)
+				{
+					console.log(first,arr[low],arr[high]);
+					low++;
+					high--;
+					boolean = true;
+				}
+				else if(sum < 0)
+				{
+					low++;
+				}
+				else
+				{
+					high--;
+				}
+			}
+		}
+		return boolean;
 	}
 	
 }
