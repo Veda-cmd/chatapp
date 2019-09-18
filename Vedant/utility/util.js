@@ -399,6 +399,6 @@ module.exports ={
 		var payment = P * r/(1-pow);
 		console.log("Monthly payment is "+payment);
 		return 1;
-	}
+	},
 	
 }
