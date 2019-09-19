@@ -26,7 +26,8 @@ module.exports ={
 	inputInt: function()
 	{	
 		let val = Number(rl.question("Input an number:"));
-		if(isNaN(val)){
+		if(isNaN(val))
+		{
 			console.log('Input should be a valid number');
 			return false;
 		}
@@ -42,12 +43,13 @@ module.exports ={
 	inputStr: function()
 	{	
 		let val = rl.question("Input:");
-		if(isNaN(val))
-			return val;
-		else{
+		if(!isNaN(val))
+		{
 			console.log('Input should be a valid string');
 			return false;
 		}
+		else
+			return val;
 	},
 
 	/**

@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 var src = require('../utility/linkedlistUtil.js');
 
@@ -17,6 +18,7 @@ ll.removeElement('end');
 ll.removeElement('sun');
 ll.removeElement('owl');
 ll.removeElement('monday');
+ll.removeElement('end');
 var o = ll.printList();
 console.log(o);
 var outputFile = fs.writeFileSync("./output/unorderedlist.txt",o);

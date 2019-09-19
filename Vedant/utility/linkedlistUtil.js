@@ -118,6 +118,10 @@ class LinkedList
 		return this.size == 0; 
 	} 
 
+	getSize()
+	{
+		return this.size;
+	}
 
 	// prints the list items 
 	printList() 

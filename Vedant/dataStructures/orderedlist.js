@@ -126,7 +126,7 @@ class LinkedList
 		if(this.head == null)
 			return;
 
-		while(curr != null)
+		while(curr.next != null)
 		{
 			index = curr.next;
 			while(index != null)
@@ -159,7 +159,7 @@ class LinkedList
 			str += curr.element + " "; 
 			curr = curr.next; 
 		} 
-		console.log("prints"+str)
+		console.log("prints "+str)
 		return str;
 	} 
 }
@@ -174,13 +174,11 @@ for(var i = 0;i<c.length;i++)
 	ll.add(c[i]);
 }    
  
-ll.printList();
 ll.insertAt(45,4);
 ll.removeElement(100);
 ll.removeElement(10);
 ll.removeElement(15);
 ll.removeElement(25);
-ll.printList();
 ll.sortList();
 var o = ll.printList();
 console.log(o);
