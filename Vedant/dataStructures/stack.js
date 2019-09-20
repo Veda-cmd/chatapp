@@ -39,9 +39,10 @@ isMatched = (element1, element2) =>
 
 (main = () =>
 {
-	var exp = "(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3)";
+	var exp = "(5+6)∗(7+8)/(4+3))5+6)∗(7+8)/(4+3)";
+	// console.log(exp.split(""));
 
-	if(balancedParantheses(exp.split()))
+	if(balancedParantheses(exp.split("")))
 		console.log("Expression is balanced.");
 	else
 		console.log("Expression is not balanced.");

@@ -42,14 +42,20 @@ module.exports ={
 
 	inputStr: function()
 	{	
-		let val = rl.question("Input:");
-		if(!isNaN(val))
+		try
 		{
-			console.log('Input should be a valid string');
-			return false;
+			let val = rl.question("Input:");
+			if(!isNaN(val))
+			{
+				throw 'Input should be a valid string';
+				return false;
+			}
+			else
+				return val;
 		}
-		else
-			return val;
+		catch(err){
+			console.log(err);	
+		}
 	},
 
 	/**
@@ -62,27 +68,37 @@ module.exports ={
 
     anagram: function(str1,str2)
 	{
-		if(!isNaN(str1) || !isNaN(str2) || str1 == undefined || str2 == undefined)
-			return false;
+		try
+		{
+			if(!isNaN(str1) || !isNaN(str2) || str1 == undefined || str2 == undefined)
+				return false;
 
-		if(str1.length!=str2.length)
-			return false;
-		else
-		{	
-			str1=str1.toLowerCase();
-			str2=str2.toLowerCase();
-			var string1 = [];
-			var string2 = [];
-			string1 = str1.split('').sort().join('');
-			string2 = str2.split('').sort().join('');
-			for(var i = 0;i<str1.length;i++)
-			{
-				if(string1[i]!=string2[i])
-				{
-					return false;
-				}			
+			if(str1.length!=str2.length)
+			{	
+				console.log("Lengths are different");
+				return false;
 			}
-			return true;
+			else
+			{	
+				str1=str1.toLowerCase();
+				str2=str2.toLowerCase();
+				var string1 = [];
+				var string2 = [];
+				string1 = str1.split('').sort().join('');
+				string2 = str2.split('').sort().join('');
+				for(var i = 0;i<str1.length;i++)
+				{
+					if(string1[i]!=string2[i])
+					{
+						return false;
+					}			
+				}
+				return true;
+			}
+		}
+		catch(err)
+		{
+			console.log(err.message);
 		}
 	},
 

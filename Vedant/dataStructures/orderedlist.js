@@ -167,6 +167,7 @@ class LinkedList
 var text = fs.readFileSync('./input.txt','utf8');
 // var string = "string";
 var c = text.split(" ");
+
 var ll = new LinkedList(); 
 
 for(var i = 0;i<c.length;i++)
