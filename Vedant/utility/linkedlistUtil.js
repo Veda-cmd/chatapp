@@ -112,6 +112,32 @@ class LinkedList
 		return -1; 
 	} 
 
+	sortList()
+	{
+		var curr = this.head,
+			index = null,
+			temp;
+
+		if(this.head == null)
+			return;
+
+		while(curr.next != null)
+		{
+			index = curr.next;
+			while(index != null)
+			{
+				if(curr.element > index.element)
+				{
+					temp = curr.element;
+					curr.element=index.element;
+					index.element=temp;
+				}
+				index=index.next;
+			}
+			curr=curr.next;
+		}
+	}
+	
 	// checks the list for empty 
 	isEmpty() 
 	{ 

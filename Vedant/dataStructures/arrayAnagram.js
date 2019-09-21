@@ -23,94 +23,29 @@ var src = require('../utility/util.js');
 Prime = (array) =>
 {
 	let start = 1, end = 100;
-	for(let i=0;i<array.length;i++)
-	{	
-		let k = 0;	
+	for(i=0;i<array.length;i++)
+	{
+		let count=0;
 		for(let j=start;j<=end;j++)
-		{
-			if(src.isPrime(j)==0)
-				k++;
-		}
-		array[i] = [k];
-		start = end + 1;
-		end = end + 100;
-	}
-}
-
-(print = () =>
-{
-	var array = new Array(10);
-	Prime(array);
-	let start = 1, end = 100;
-	
-	for(let i=0;i<array.length;i++)
-	{	
-		let k = 0;	
-		for(let j=start;j<=end;j++)
-		{
-			if(src.isPrime(j)==0)
-			{			
-				array[i][k] = j;
-				k++;
+		{	
+			for(let k=j+1;k<=end;k++)
+			{
+				if(src.isPrime(k) == 0 && src.anagramPrime(j,k) == true)
+					count++;				
 			}
 		}
+		array[i]=[count];
 		start = end + 1;
-		end = end + 100;
+		end = end + 100;	
 	}
 
 	console.log(array);
-})();
-
-
-
-/**
-*@description Function prints prime numbers from 1 to n.
-*/
-
-Anagram = () => 
-{	
-
-	/**
-	*@description Empty string to store all the prime numbers.
-	*@var {string} global str.
-	*/
-	var primeString = '',anagramString = '';;
-
-	/**
-	*@description variable takes input from user.
-	*@var {number} n
-	*/
-
-  	var n = 1000;
-
-  	/**
-	*@description loop checks whether input is in range of 0 to 1000.If true, it executes the
-	*statements inside the loop.
-	*/
-
-  	for(i=2;i<=n;i++)
-  	{
-		if(src.isPrime(i)==0)
-			primeString+= ' '+i;
-  	}
-
-	var array = primeString.replace(' ', '').split(' ');
-
-  	for (var i = 0; i < array.length; i++) 
-  	{
-    	for (var j = i + 1; j < array.length; j++) 
-    	{
-
-      		/**
-			*@description loop checks boolean value returned by the function which is called from
-			*another file.If it is true, it prints the output.
-			*/
-      		if (src.anagramPrime(array[i], array[j])) 
-      	  		anagramString+=' '+array[i]+' '+array[j];
-    	}
-  	}
-  	console.log(anagramString);
+	
 }
 
-Anagram();
+(Anagram = () =>
+{
+	var anagram = [10];
+	Prime(anagram);
 
+})();
