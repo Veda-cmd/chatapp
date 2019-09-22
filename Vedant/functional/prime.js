@@ -21,7 +21,7 @@ var src = require('../utility/util.js');
 
 /**
 *@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
-*it is created. The function prints the result of the gambler.
+*it is created. The function prints the string of prime numbers from 0 to 1000.
 */
 
 (function Prime() {
