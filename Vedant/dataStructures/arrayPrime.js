@@ -20,12 +20,17 @@
 var src = require('../utility/util.js');
 
 /**
-*@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
-*it is created. The function prints the result of the gambler.
+*@description Function takes array as input and processes the number of columns for each index from
+*0 to 10.
 */
 
 Prime = (array) =>
 {
+	/**
+	*@description start and end are used as counters for each iteration
+	*@var {Number} start,end.
+	*/
+
 	let start = 1, end = 100;
 	for(let i=0;i<array.length;i++)
 	{	
@@ -41,11 +46,24 @@ Prime = (array) =>
 	}
 }
 
+/**
+*@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
+*it is created. The function prints prime numbers from 0 to 1000 in 2D array.
+*/
+
 (print = () =>
 {
+	/**
+	*@description array is initialized with a size of 10.
+	*@var {Array} array.
+	*/
+
 	var array = new Array(10);
+
 	Prime(array);
+
 	let start = 1, end = 100;
+
 	for(let i=0;i<array.length;i++)
 	{	
 		let k = 0;	

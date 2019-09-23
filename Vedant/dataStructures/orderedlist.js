@@ -1,44 +1,64 @@
 /********************************************************************************************
 *Execution    :  default node     cmd> node orderedlist.js 
 *
-*Purpose      :  To sort a linked list.
+*Purpose      :  To sort a linked list using Bubble Sort.
 *
 *@description  
 *
-*@file        :  palindromeChecker.js 
-*@overview    :  print module to print the numbers in the range of 0 to 1000 in 2D array.
-				 Prime module to determine the columns for second dimension of 2D array.
+*@file        :  orderedlist.js 
+*@overview    :  orderedLinkedList module to sort a linked list using Bubble Sort.
 *@author	  :  Vedant Nare <vedant.nare04@gmail.com>
 *@version     :  1.0
 *********************************************************************************************/ 
 
 /**
 *@description Dependencies require to be installed before the execution of this file.
-*@var src, fs  imports other files for execution of program.
+*@const fs imports file system module.
+*@var src imports other files for execution of program.
 */
 
 const fs = require('fs');
 var src = require('../utility/linkedlistUtil.js');
 
-var text = fs.readFileSync('./input.txt','utf8');
+/**
+*@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
+*it is created. The function prints the sorted Linked list.
+*/
 
-var c = text.split(" ");
-
-var ll = new src.LinkedList(); 
-
-for(var i = 0;i<c.length;i++)
+(orderedLinkedList = () =>
 {
-	ll.add(c[i]);
-}    
- 
-ll.insertAt(45,4);
-ll.removeElement(100);
-ll.removeElement(10);
-ll.removeElement(15);
-ll.removeElement(25);
-ll.sortList();
-var o = ll.printList();
-console.log(o);
-var outputFile = fs.writeFileSync("./output/orderedlist.txt",o);
+	/**
+	*@description variables are used as initial inputs.
+	*@var text stores contents of input file.
+	*@var {Array} c stores array of variable text.
+	*@var {Object} linkedlist stores object of class Linked List.
+	*/
+
+	var text = fs.readFileSync('./input.txt','utf8');
+	var c = text.split(" ");
+	var linkedlist = new src.LinkedList(); 
+
+	for(var i = 0;i<c.length;i++)
+	{
+		linkedlist.add(c[i]);
+	}    
+	 
+	linkedlist.insertAt(45,4);
+	linkedlist.removeElement(100);
+	linkedlist.removeElement(10);
+	linkedlist.removeElement(15);
+	linkedlist.removeElement(25);
+	linkedlist.sortList();
+
+	/**
+	*@description variables output and outputFile are used for storing results
+	*/
+
+	var output = linkedlist.printList();
+
+	console.log(output);
+
+	var outputFile = fs.writeFileSync("./output/orderedlist.txt",output);
+})();
 
 

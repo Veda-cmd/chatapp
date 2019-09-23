@@ -1,15 +1,53 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node banking.js 
+*
+*Purpose      :  To simulate cash counter at a bank to deposit or withdraw money using queue.
+*
+*@description  
+*
+*@file        :  banking.js 
+*@overview    :  cashBalance module to simulate cash counter at a bank to deposit or withdraw 
+				 money using Queue data structure.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var src, util imports other files for execution of program.
+*/
+
 var src = require("../utility/queueUtil.js");
 var util = require("../utility/util.js");
 
+/**
+*@description Function performs simulation of the cash counter.
+*/
+
 cashBalance = () =>
 {
+	/**
+	*@description queue stores object of class Queue.
+	*@var {Object} queue.
+	*/
+
 	var queue = new src.Queue();
+
+	/**
+	*@description variables are used as initial inputs and have global scope.
+	*@var {Number} initialBalance, enqueueCount, dequeueCount, count.
+	*/
+
 	var initialBalance = 1000,
 		    enqueueCount = 0,
 			dequeueCount = 0,
-			count = 0,i = 0;
+			count = 0, i = 0;
 	console.log("-----------------------------------");
 	console.log("Welcome to the Banking Program");
+
+	/**
+	*@description while loop runs until user enters 3 as choice.
+	*/
 
 	while(i==0)
 	{	
@@ -18,6 +56,15 @@ cashBalance = () =>
 		console.log("Enter 2 to withdraw amount");
 		console.log("Enter 3 to exit");
 		let choice = util.inputInt(),amount;
+
+		/**
+		*@description switch statement executes the particular choice entered by user.
+		*If case 1, enqueue and dequeue operations of class Queue are used to add and remove 
+		*customer to queue. initialBalance is updated by adding amount entered by user.
+		*If case 2, enqueue and dequeue operations of class Queue are used to add and remove 
+		*customer to queue. initialBalance is updated by subtracting amount entered by user.
+		*If case 3, value of i is incremented and while loop stops.
+		*/
 
 		switch(choice)
 		{

@@ -1,28 +1,73 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node hashLinkedList.js 
+*
+*Purpose      :  To implement hashing using Linked List data structure.
+*
+*@description  
+*
+*@file        :  hashLinkedList.js
+*@overview    :  class hashTable is used to implement hashing.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@const fs imports file system module.
+*@var src imports other files for execution of program.
+*/
+
 const fs = require('fs');
 var src = require('../utility/linkedlistUtil.js');
 
-// User defined class node 
 // var text = fs.readFileSync('./input.txt','utf8');
 // var c = text.split(" ");
 
-var ll = new src.LinkedList(); 
+/**
+*@description linkedlist stores LinkedList object.
+*@var linkedlist
+*/
+
+var linkedlist = new src.LinkedList(); 
+
+/**
+*@description for loop creates a linked list of size 11 using add function.
+*/
 
 for(let i = 0;i<11;i++)
 {
-	ll.add(i);
+	linkedlist.add(i);
 }    
 
-const size = ll.getSize();
+/**
+*@description size stores the Linked list size.
+*@const {Number} size
+*/
+
+const size = linkedlist.getSize();
+
+/**
+*@description for loop assigns an dynamic array to each element of linked list.
+*/
 
 for(let i = 0;i<size;i++ )
 {
-	ll[i] = [];
+	linkedlist[i] = [];
 }
+
+/**
+*@description hash function is used to calculate the modulus of value and size.
+*/
 
 hash = (a,size) =>
 {
 	return a % size;
 }
+
+/**
+*@description hashTable class is used to perform hashing. hashTable class has the following 
+*functions: add, remove and print. Regex is used for validation of white spaces.
+*/
 
 class hashTable
 {
@@ -41,17 +86,18 @@ class hashTable
 		let index = hash(value,size);
 		let inserted = false;
 		
-		for(let i=0;i<ll[index].length;i++)
+		for(let i=0;i<linkedlist[index].length;i++)
 		{
-			if(ll[index][i] === value)
+			if(linkedlist[index][i] === value)
 			{
 				ll[index][i] = value;
+				linkedlist[index][i] == value;
 				inserted = true;
 			}	
 		}
 
 		if(inserted == false){
-			ll[index].push(value);
+			linkedlist[index].push(value);
 		}
 	}
 
@@ -67,15 +113,15 @@ class hashTable
 		let index = hash(value,size);
 		let deleted = false;
 
-		if(ll[index].length === 1 && ll[index][0] === value)
-      		delete ll[index]; 
+		if(linkedlist[index].length === 1 && linkedlist[index][0] === value)
+      		delete linkedlist[index]; 
       	else 
     	{
-      		for (var i = 0; i < ll[index].length; i++) 
+      		for (var i = 0; i < linkedlist[index].length; i++) 
       		{
-        		if (ll[index][i] === value)
+        		if (linkedlist[index][i] === value)
         		{ 
-          			delete ll[index][i];
+          			delete linkedlist[index][i];
           			deleted = true;
           		}
       		}
@@ -89,12 +135,17 @@ class hashTable
 		var str = "";
 		for(let i=0;i<size;i++)
 		{
-			str+=ll[i]+",";
+			str+=linkedlist[i]+",";
 		}
-		console.log(ll);
+		console.log(linkedlist);
 		return str;
 	}
 }
+
+/**
+*@description ht is used for storing hashTable object.
+*@let {Object} ht
+*/
 
 let ht = new hashTable();
 ht.add(12);

@@ -1,9 +1,44 @@
+/***********************************************************************************************
+*Execution    :  default node     cmd> node stack.js 
+*
+*Purpose      :  To determine whether a expression is balanced or not using Stack.
+*
+*@description  
+*
+*@file        :  stack.js
+*@overview    :  balancedParantheses module to determine whether a expression is balanced or not 
+				 using Stack.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+************************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var src imports other files for execution of program.
+*/
+
 var src = require("../utility/stackUtil.js")
+
+/**
+*@description Function takes array of given expression and determines whether the expression
+*is balanced or not. It returns a boolean value.
+*/
 
 balancedParantheses = (exp) =>
 {
 
+	/**
+	*@description variable stores object of class Stack.
+	*@var {Object} stack
+	*/
+
 	var stack = new src.Stack();
+
+	/**
+	*@description for loop to check to run till length of expression. If opening parantheses is
+	*found, it will push to stack. If closing parantheses is found, pop operation is performed and
+	*passed to isMatched function with current value of expression.
+	*/
 
 	for(let i=0;i<exp.length;i++)
 	{
@@ -19,12 +54,20 @@ balancedParantheses = (exp) =>
 		}		
 	}
 
+	/**
+	*@description loop to check whether is stack is empty or not.
+	*/
+
 	if(stack.isEmpty())
 		return true;
 	else
 		return false;
 	
 }
+
+/**
+*@description loop to check whether two elements are equal or not.
+*/
 
 isMatched = (element1, element2) =>
 {
@@ -37,10 +80,14 @@ isMatched = (element1, element2) =>
 	return false;
 }
 
+/**
+*@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
+*it is created. The function prints output if expression is balanced or not.
+*/
+
 (main = () =>
 {
-	var exp = "(5+6)∗(7+8)/(4+3))5+6)∗(7+8)/(4+3)";
-	// console.log(exp.split(""));
+	var exp = "(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3)";
 
 	if(balancedParantheses(exp.split("")))
 		console.log("Expression is balanced.");
