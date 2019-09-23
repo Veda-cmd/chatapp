@@ -19,8 +19,6 @@ for(let i = 0;i<size;i++ )
 	ll[i] = [];
 }
 
-// console.log(ll);
-
 hash = (a,size) =>
 {
 	return a % size;
@@ -47,7 +45,7 @@ class hashTable
 		{
 			if(ll[index][i] === value)
 			{
-				ll[index][i] == value;
+				ll[index][i] = value;
 				inserted = true;
 			}	
 		}

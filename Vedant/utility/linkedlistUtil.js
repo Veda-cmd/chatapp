@@ -1,5 +1,27 @@
-class Node { 
-	// constructor 
+/********************************************************************************************
+*Execution    :  default node     cmd> node linkedlistUtil.js 
+*
+*Purpose      :  To implement class Linked List.
+*
+*@description  
+*
+*@file        :  linkedlistUtil.js 
+*@overview    :  class Linked List to implement linked list and its functions.
+				 class Node to implement node of a linked list.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+
+/**
+*@description user defined class Node
+*/
+
+class Node 
+{ 
+	/**
+	*@description constructor of Node
+	*/
 	constructor(element) 
 	{ 
 		this.element = element; 
@@ -7,7 +29,10 @@ class Node {
 	} 
 } 
 
-// linkedlist class 
+/**
+*@description class Linked List
+*/
+
 class LinkedList 
 { 
 	constructor() 
@@ -16,67 +41,82 @@ class LinkedList
 		this.size = 0; 
 	} 
 
-	// adds an element at the end 
-	// of list 
+	/** 
+	*@description adds an element at the end of list  
+	*/ 
+
 	add(element) 
 	{ 
-		// creates a new node 
+		/**
+		*@description creates a new node 
+		*/ 
+
 		var node = new Node(element); 
 
-		// to store current node 
+		/**
+		*@description to store current node 
+		*/ 
+
 		var current; 
 
-		// if list is Empty add the 
-		// element and make it head 
+		/**
+		*@description if list is Empty add the element and make it head. 
+		*/
+
 		if (this.head == null) 
 			this.head = node; 
 		else { 
 			current = this.head; 
 
-			// iterate to the end of the 
-			// list 
-			while (current.next) { 
+			/**
+			*@description iterate to the end of the list 
+			*/ 
+			while (current.next) 
+			{ 
 				current = current.next; 
-			} 
-
-			// add node 
+			}  
 			current.next = node; 
 		} 
 		this.size++; 
 	} 
 
-// insert element at the position index 
-// of the list 
+/** 
+*@description insert element at the position index of the list
+*/  
 	insertAt(element, index) 
 	{ 
 		if (index > 0 && index > this.size) 
 			return false; 
 		else 
 		{ 
-			// creates a new node 
+			/**
+			*@description creates a new node 
+			*/ 
+
 			var node = new Node(element); 
 			var curr, prev; 
 
 			curr = this.head; 
 
-			// add the element to the 
-			// first index 
-			if (index == 0) { 
+			/** 
+			*@description add the element to the first index 
+			*/ 
+			if (index == 0) 
+			{ 
 				node.next = head; 
 				this.head = node; 
-			} else { 
+			} 
+			else 
+			{ 
 				curr = this.head; 
 				var it = 0; 
 
-				// iterate over the list to find 
-				// the position to insert 
-				while (it < index) { 
+				while (it < index) 
+				{ 
 					it++; 
 					prev = curr; 
 					curr = curr.next; 
 				} 
-
-				// adding an element 
 				node.next = curr; 
 				prev.next = node; 
 			} 
@@ -84,19 +124,19 @@ class LinkedList
 		} 
 	} 
 
-	// removes a given element from the 
-	// list 
+	/** 
+	*@description removes a given element from the list 
+	*/
+
 	removeElement(element) 
 	{ 
 		var current = this.head; 
 		var prev = null; 
-		// iterate over the list 
+
 		while (current != null) 
 		{ 
-			// comparing element with current 
-			// element if found then remove the 
-			// and return true 
-			if (current.element == element) { 
+			if (current.element == element) 
+			{ 
 				if (prev == null) { 
 					this.head = current.next; 
 				} else { 
@@ -111,6 +151,10 @@ class LinkedList
 		this.add(element);
 		return -1; 
 	} 
+
+	/** 
+	*@description sorts the Linked List 
+	*/
 
 	sortList()
 	{
@@ -138,23 +182,33 @@ class LinkedList
 		}
 	}
 	
-	// checks the list for empty 
+	/**
+	*@description checks the list if empty or not 
+	*/
 	isEmpty() 
 	{ 
 		return this.size == 0; 
 	} 
+
+	/**
+	*@description returns size of the linked list
+	*/
 
 	getSize()
 	{
 		return this.size;
 	}
 
-	// prints the list items 
+	/**
+	*@description prints the list items
+	*/
+
 	printList() 
 	{ 
 		var curr = this.head; 
 		var str = ""; 
-		while (curr) { 
+		while (curr) 
+		{ 
 			str += curr.element + " "; 
 			curr = curr.next; 
 		} 

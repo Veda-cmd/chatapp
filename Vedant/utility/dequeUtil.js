@@ -1,5 +1,22 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node dequeUtil.js 
+*
+*Purpose      :  To implement class Deque
+*
+*@description  
+*
+*@file        :  dequeUtil.js 
+*@overview    :  class Deque to implement Deque and its functions.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/** 
+*@description Deque class
+*/
+
 class Deque
- {
+{
  	constructor()
 	{
 		this.array = [];
@@ -7,6 +24,10 @@ class Deque
 		this.rear = -1;
 		this.size = 0;
 	}
+
+	/** 
+	*@description adds an element at the end of queue and increments rear index.  
+	*/ 
 
 	add(x)
 	{
@@ -21,6 +42,10 @@ class Deque
 		this.size++;
 
 	}
+
+	/** 
+	*@description deletes a element from front of queue and increments front index. 
+	*/
 
 	deleteFront()
 	{
@@ -40,6 +65,8 @@ class Deque
 		this.size--;
 
 	}
+
+	
 
 	deleteRear()
 	{
