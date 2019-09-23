@@ -31,6 +31,13 @@ class Deque
 
 	add(x)
 	{
+		let	validationRule = /^\s{1,}$/;
+		if(x == undefined || validationRule.test(x) == true)
+		{
+			console.log("Value is undefined");
+			return false;
+		}
+
 		if(this.isEmpty())
 		{
 			this.front++;
@@ -40,6 +47,7 @@ class Deque
 			this.rear++;
 		this.array[this.rear]=x;
 		this.size++;
+		return 1;
 
 	}
 
@@ -58,15 +66,17 @@ class Deque
 		}
 
 		else
-		{
-			return this.array.shift();
+		{	
 			this.front++;
+			this.size--;
+			return this.array.shift();
 		}
-		this.size--;
 
 	}
 
-	
+	/** 
+	*@description deletes a element from rear of queue and increments rear index. 
+	*/
 
 	deleteRear()
 	{
@@ -78,21 +88,34 @@ class Deque
 		}
 		else
 		{
-			return this.array.pop();
 			this.rear--;
+			this.size--;
+			return this.array.pop();
 		}
-		this.size--;
 
 	}
+
+	/**
+	*@description checks the queue if empty or not 
+	*/
 
 	isEmpty()
 	{
 		return this.array.length == 0;
 	}
 
-	getSize(){
+	/**
+	*@description returns size of the queue
+	*/
+
+	getSize()
+	{
 		return this.size;
 	}
+
+	/**
+	*@description prints the queue items
+	*/
 
 	printQueue() 
 	{ 

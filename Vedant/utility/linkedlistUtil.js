@@ -22,6 +22,7 @@ class Node
 	/**
 	*@description constructor of Node
 	*/
+
 	constructor(element) 
 	{ 
 		this.element = element; 
@@ -47,6 +48,13 @@ class LinkedList
 
 	add(element) 
 	{ 
+		let	validationRule = /^\s{1,}$/;
+		if(element == undefined || validationRule.test(element) == true)
+		{
+			console.log("Value is undefined");
+			return false;
+		}
+
 		/**
 		*@description creates a new node 
 		*/ 
@@ -78,13 +86,27 @@ class LinkedList
 			current.next = node; 
 		} 
 		this.size++; 
+		return true;
 	} 
 
 /** 
 *@description insert element at the position index of the list
 */  
 	insertAt(element, index) 
-	{ 
+	{ 	
+		let	validationRule = /^\s{1,}$/;
+		if(element == undefined || validationRule.test(element) == true)
+		{
+			console.log("Value is undefined");
+			return false;
+		}
+
+		if(index == undefined || validationRule.test(index) == true)
+		{
+			console.log("Index is undefined");
+			return false;
+		}
+
 		if (index > 0 && index > this.size) 
 			return false; 
 		else 
@@ -121,6 +143,7 @@ class LinkedList
 				prev.next = node; 
 			} 
 			this.size++; 
+			return true;
 		} 
 	} 
 
@@ -130,6 +153,13 @@ class LinkedList
 
 	removeElement(element) 
 	{ 
+		let	validationRule = /^\s{1,}$/;
+		if(element == undefined || validationRule.test(element) == true)
+		{
+			console.log("Value is undefined");
+			return false;
+		}
+		
 		var current = this.head; 
 		var prev = null; 
 
@@ -185,6 +215,7 @@ class LinkedList
 	/**
 	*@description checks the list if empty or not 
 	*/
+	
 	isEmpty() 
 	{ 
 		return this.size == 0; 

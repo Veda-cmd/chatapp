@@ -90,14 +90,14 @@ class hashTable
 		{
 			if(linkedlist[index][i] === value)
 			{
-				ll[index][i] = value;
-				linkedlist[index][i] == value;
+				linkedlist[index][i] = value;
 				inserted = true;
 			}	
 		}
 
 		if(inserted == false){
 			linkedlist[index].push(value);
+			return true;
 		}
 	}
 
@@ -113,21 +113,24 @@ class hashTable
 		let index = hash(value,size);
 		let deleted = false;
 
-		if(linkedlist[index].length === 1 && linkedlist[index][0] === value)
-      		delete linkedlist[index]; 
-      	else 
-    	{
-      		for (var i = 0; i < linkedlist[index].length; i++) 
-      		{
-        		if (linkedlist[index][i] === value)
-        		{ 
-          			delete linkedlist[index][i];
-          			deleted = true;
-          		}
-      		}
-      		if(deleted == false)
-          		return this.add(value);
-    	}
+		if(linkedlist[index].length === 1 && linkedlist[index][0] == value)
+		{
+			delete linkedlist[index][0];
+		}
+		else
+		{
+	  		for (var i = 0; i < linkedlist[index].length; i++) 
+	  		{
+	    		if (linkedlist[index][i] === value)
+	    		{ 
+	      			delete linkedlist[index][i];
+	      			deleted = true;
+	      			return true;
+	      		}
+	  		}
+	  		if(deleted == false)
+	      		return this.add(value);
+	    }
 	}
 
 	print() 
@@ -149,6 +152,7 @@ class hashTable
 
 let ht = new hashTable();
 ht.add(12);
+ht.remove(12);
 ht.add(77);
 ht.add(66);
 ht.add(55);
@@ -159,9 +163,10 @@ ht.add(27);
 ht.add("  ");
 ht.remove("  ");
 ht.remove(36);
+ht.remove(47);
 ht.add(48);
 ht.add(118);
-ht.remove(76);
+ht.remove(24);
 ht.remove(35);
 var res = ht.print();
 

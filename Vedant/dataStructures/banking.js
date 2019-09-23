@@ -84,7 +84,6 @@ cashBalance = () =>
 			}
 			else
 				console.log("Amount must be between 1 and "+initialBalance);
-
 			break;
 
 			case 2:

@@ -17,6 +17,7 @@
 */
 
 var src = require("../utility/dequeUtil.js")
+var src = require("../utility/dequeUtil.js")
 
 /**
 *@description Function checks whether the given string is palindrome or not and returns a boolean
@@ -31,8 +32,6 @@ palindrome = () =>
 		*@description string is used for storing input.
 		*@var string
 		*/
-
-		var string="madam";
 		string = string.split("");
 		
 		if(string == " " || string == undefined || string == "")
