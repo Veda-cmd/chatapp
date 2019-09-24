@@ -73,7 +73,8 @@ class LinkedList
 
 		if (this.head == null) 
 			this.head = node; 
-		else { 
+		else 
+		{ 
 			current = this.head; 
 
 			/**
@@ -101,9 +102,9 @@ class LinkedList
 			return false;
 		}
 
-		if(index == undefined || validationRule.test(index) == true)
+		if(index == undefined || index < 0 || validationRule.test(index) == true)
 		{
-			console.log("Index is undefined");
+			console.log("Index is incorrect");
 			return false;
 		}
 
@@ -116,30 +117,30 @@ class LinkedList
 			*/ 
 
 			var node = new Node(element); 
-			var curr, prev; 
+			var current, prev; 
 
-			curr = this.head; 
+			current = this.head; 
 
 			/** 
 			*@description add the element to the first index 
 			*/ 
 			if (index == 0) 
 			{ 
-				node.next = head; 
+				node.next = this.head; 
 				this.head = node; 
 			} 
 			else 
 			{ 
-				curr = this.head; 
-				var it = 0; 
+				current = this.head; 
+				let it = 0; 
 
 				while (it < index) 
 				{ 
 					it++; 
-					prev = curr; 
-					curr = curr.next; 
+					prev = current; 
+					current = current.next; 
 				} 
-				node.next = curr; 
+				node.next = current; 
 				prev.next = node; 
 			} 
 			this.size++; 
@@ -153,33 +154,39 @@ class LinkedList
 
 	removeElement(element) 
 	{ 
-		let	validationRule = /^\s{1,}$/;
-		if(element == undefined || validationRule.test(element) == true)
+		try
 		{
-			console.log("Value is undefined");
-			return false;
-		}
-		
-		var current = this.head; 
-		var prev = null; 
+			let	validationRule = /\s/;
+			if(validationRule.test(element))
+			{
+				throw 'Invalid number';
+				return false;
+			}
+			
+			var current = this.head; 
+			var prev = null; 
 
-		while (current != null) 
-		{ 
-			if (current.element == element) 
+			while (current != null) 
 			{ 
-				if (prev == null) { 
-					this.head = current.next; 
-				} else { 
-					prev.next = current.next; 
+				if (current.element == element) 
+				{ 
+					if (prev == null) 
+						this.head = current.next; 
+					else 
+						prev.next = current.next; 
+					this.size--; 
+					return current.element; 
 				} 
-				this.size--; 
-				return current.element; 
-			} 
-			prev = current; 
-			current = current.next; 
+				prev = current; 
+				current = current.next; 
+			}
+			console.log('Number not found');
+			this.add(element);
+			return -1; 
 		}
-		this.add(element);
-		return -1; 
+		catch(err){
+			console.log(err);	
+		}
 	} 
 
 	/** 
@@ -188,27 +195,27 @@ class LinkedList
 
 	sortList()
 	{
-		var curr = this.head,
+		var current = this.head,
 			index = null,
 			temp;
 
 		if(this.head == null)
 			return;
 
-		while(curr.next != null)
+		while(current.next != null)
 		{
-			index = curr.next;
+			index = current.next;
 			while(index != null)
 			{
-				if(curr.element > index.element)
+				if(current.element > index.element)
 				{
-					temp = curr.element;
-					curr.element=index.element;
+					temp = current.element;
+					current.element=index.element;
 					index.element=temp;
 				}
 				index=index.next;
 			}
-			curr=curr.next;
+			current=current.next;
 		}
 	}
 	
@@ -236,13 +243,14 @@ class LinkedList
 
 	printList() 
 	{ 
-		var curr = this.head; 
+		var current = this.head; 
 		var str = ""; 
-		while (curr) 
+		while (current) 
 		{ 
-			str += curr.element + " "; 
-			curr = curr.next; 
+			str += current.element + " "; 
+			current = current.next; 
 		} 
+		console.log(str);
 		return str;
 	} 
 }

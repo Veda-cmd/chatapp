@@ -17,14 +17,14 @@
 */
 
 var src = require("../utility/dequeUtil.js")
-var src = require("../utility/dequeUtil.js")
+var util = require("../utility/util.js")
 
 /**
 *@description Function checks whether the given string is palindrome or not and returns a boolean
 *value. try and catch block is used for handling errors.
 */
 
-palindrome = () =>
+palindrome = (string) =>
 {
 	try
 	{
@@ -32,10 +32,12 @@ palindrome = () =>
 		*@description string is used for storing input.
 		*@var string
 		*/
+		let	validationRule = /^\s{1,}$/;
+		if(validationRule.test(string) == true || string == undefined || string == "" || 
+			string == null)
+			return false;
+
 		string = string.split("");
-		
-		if(string == " " || string == undefined || string == "")
-			throw "Invalid input";
 
 		/**
 		*@description deque stores the object of class Deque from another file.
@@ -85,9 +87,7 @@ palindrome = () =>
 			if(matched==false)
 				return false;
 		}
-
-		if(matched==true)
-			return true;
+		return true;
 	}
 
 	catch(err)
@@ -100,7 +100,8 @@ palindrome = () =>
 *@description if-else loop prints output based on the return value of palindrome function.
 */
 
-if(palindrome())
+var string = util.inputString();
+if(palindrome(string))
 	console.log("String is a palindrome");
 else
 	console.log("String is not a palindrome");

@@ -19,46 +19,55 @@
 
 const fs = require('fs');
 var src = require('../utility/linkedlistUtil.js');
+var util = require("../utility/util.js")
 
 /**
 *@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
 *it is created. The function prints the sorted Linked list.
 */
 
-(orderedLinkedList = () =>
+orderedLinkedList = () =>
 {
-	/**
-	*@description variables are used as initial inputs.
-	*@var text stores contents of input file.
-	*@var {Array} c stores array of variable text.
-	*@var {Object} linkedlist stores object of class Linked List.
-	*/
-
-	var text = fs.readFileSync('./input.txt','utf8');
-	var c = text.split(" ");
-	var linkedlist = new src.LinkedList(); 
-
-	for(var i = 0;i<c.length;i++)
+	try
 	{
-		linkedlist.add(c[i]);
-	}    
-	 
-	linkedlist.insertAt(45,4);
-	linkedlist.removeElement(100);
-	linkedlist.removeElement(10);
-	linkedlist.removeElement(15);
-	linkedlist.removeElement(25);
-	linkedlist.sortList();
+		/**
+		*@description variables are used as initial inputs.
+		*@var text stores contents of input file.
+		*@var {Array} c stores array of variable text.
+		*@var {Object} linkedlist stores object of class Linked List.
+		*/
 
-	/**
-	*@description variables output and outputFile are used for storing results
-	*/
+		var text = fs.readFileSync('./input.txt','utf8');
+		var c = text.split(" ");
+		var linkedlist = new src.LinkedList(); 
 
-	var output = linkedlist.printList();
+		for(var i = 0;i<c.length;i++)
+		{
+			linkedlist.add(c[i]);
+		}    
+		 
+		linkedlist.printList();
 
-	console.log(output);
+		console.log('Enter number to be searched:');
+		let search = util.inputInt();
+		if(search)
+			linkedlist.removeElement(search);
+		
+		linkedlist.sortList();
 
-	var outputFile = fs.writeFileSync("./output/orderedlist.txt",output);
-})();
+		/**
+		*@description variables output and outputFile are used for storing results
+		*/
+
+		var output = linkedlist.printList();
+
+		var outputFile = fs.writeFileSync("./output/orderedlist.txt",output);
+}
+	catch(err)
+	{
+		console.log(err.message);
+	}
+}
+orderedLinkedList();
 
 
