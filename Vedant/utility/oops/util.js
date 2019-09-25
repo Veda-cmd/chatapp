@@ -87,7 +87,8 @@ inventory = (src) =>
 		console.log(`${choice} is invalid.Please restart the program.`);
 		break;
 	}
-}
+},
+
 
 module.exports ={
 	inventory

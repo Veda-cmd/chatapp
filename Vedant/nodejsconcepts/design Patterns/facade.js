@@ -2,14 +2,14 @@ let currentId = 0;
 
 class ComplaintRegistry {
   registerComplaint(customer, type, details) {
-    const id = ComplaintRegistry._uniqueIdGenerator();
+    const userid = ComplaintRegistry._uniqueIdGenerator();
     let registry;
     if (type === 'service') {
       registry = new ServiceComplaints();
     } else {
       registry = new ProductComplaints();
     }
-    return registry.addComplaint({ id, customer, details });
+    return registry.addComplaint({ userid, customer, details });
   }
 
   static _uniqueIdGenerator() {
@@ -24,6 +24,7 @@ class Complaints {
 
   addComplaint(complaint) {
     this.complaints.push(complaint);
+    console.log(this.complaints);
     return this.replyMessage(complaint);
   }
 
@@ -45,8 +46,8 @@ class ProductComplaints extends Complaints {
     return this;
   }
 
-  replyMessage({ id, customer, details }) {
-    return `Complaint No. ${id} reported by ${customer} regarding ${details} have been filed with the Products Complaint Department. Replacement/Repairment of the product as per terms and conditions will be carried out soon.`;
+  replyMessage({ userid, customer, details }) {
+    return `Complaint No. ${userid} reported by ${customer} regarding ${details} have been filed with the Products Complaint Department. Replacement/Repairment of the product as per terms and conditions will be carried out soon.`;
   }
 }
 
@@ -73,4 +74,5 @@ const reportService = registry.registerComplaint('Martha', 'service', 'availabil
 // 'Complaint No. 1 reported by Martha regarding availability have been filed with the Service Complaint Department. The issue will be resolved or the purchase will be refunded as per terms and conditions.'
 
 const reportProduct = registry.registerComplaint('Jane', 'product', 'faded color');
+console.log(reportProduct)
 // 'Complaint No. 2 reported by Jane regarding faded color have been filed with the Products Complaint Department. Replacement/Repairment of the product as per terms and conditions will be carried out soon.'

@@ -1,0 +1,28 @@
+{
+    "Rice": [
+        {
+            "name": "basmati",
+            "weight": 1,
+            "price": 200
+        },
+        {
+            "name": "sxdad",
+            "weight": 5,
+            "price": 30
+        }
+    ],
+    "Pulse": [
+        {
+            "name": "Beans",
+            "weight": 1,
+            "price": 25
+        }
+    ],
+    "Wheat": [
+        {
+            "name": "Flour",
+            "weight": 1,
+            "price": 120
+        }
+    ]
+}
