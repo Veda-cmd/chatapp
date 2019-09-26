@@ -180,8 +180,7 @@ class LinkedList
 				prev = current; 
 				current = current.next; 
 			}
-			console.log('Number not found');
-			this.add(element);
+			console.log('Share not found');
 			return -1; 
 		}
 		catch(err){
@@ -252,7 +251,8 @@ class LinkedList
 		} 
 		console.log(str);
 		return str;
-	} 
+	}
+	 
 }
 
 module.exports = {
