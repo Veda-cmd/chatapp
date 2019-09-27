@@ -2,44 +2,33 @@ var src = require("../utility/util");
 
 regex = () =>
 {
-    var string = `Hello <<name>>, We have your full name as <<full name>> in our system. 
-    your contact number is 91­xxxxxxxxxx.Please,let us know in case of any clarification.
-    Thank you BridgeLabz 01/01/2016.`
+    let string = `Hello <<name>>, we have your full name as <<full name>> in our system. 
+    Your contact number is 91­xxxxxxxxxx.Please let us know in case of any clarification.
+    Thank you BridgeLabz,01/01/2016.`
+    let string1;
 
-    var name = src.inputString();
-    var fullName = src.inputString();
-    var number = src.inputInt(); 
-    var date = src.inputString();
+    let name = src.inputString(),
+      fullName = src.inputString(),
+      number = src.inputInt(),
+      date = src.inputString();
 
-    let namePattern = /^[a-zA-Z]{1,10}$/;
-    let fullNamePattern = /^[a-zA-Z]{1,30}\s{1,}$/;
-    let numberPattern = /^[0-9]{10}$/;
-    let datePattern = /^[0-9]{10}[-]{1,}$/;
+    let namePattern = /^[a-zA-Z]{1,15}$/;
+    let fullNamePattern = /^[a-zA-Z ]{1,40}$/;
+    let numberPattern = /^\d{10}$/;
+    let datePattern = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
 
-    if(namePattern.test(name))
-        string.replace(/<<name>>/i,name);
-    else
+    let nameTest = namePattern.test(name);
+    let fullNameTest = fullNamePattern.test(fullName);
+    let numberTest = numberPattern.test(number);
+    let dateTest = datePattern.test(date);
+
+    if( nameTest && fullNameTest && numberTest && dateTest)
     {
-        console.log("Name is invalid"); 
-        return false;
+      string1 = string.replace("<<name>>",name).replace("<<full name>>",fullName).replace("xxxxxxxxxx",number).replace("01/01/2016",date);
     }
-
-    if(fullNamePattern.test(fullName))
-        string.replace(/<<full name>>/i,name);
     else
-        console.log("Full Name is invalid"); 
-
-    if(numberPattern.test(number))
-        string.replace(/xxxxxxxxxx/i,number);
-    else
-        console.log("Number is invalid"); 
-
-    if(datePattern.test(date))
-        string.replace(/01-01-2016/i,date);
-    else
-        console.log("Date is invalid"); 
-
-    console.log(string);
-
+        return false;
+    
+    console.log(string1);
 }
 regex();
