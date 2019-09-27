@@ -13,7 +13,8 @@ while(i==0)
     console.log("3.Display Stock Account");
     console.log("4.Save Stock Account Details");
     console.log("5.Display Company Shares List");
-    console.log("6.Exit")
+    console.log("6.Display Total Value of Stock Account");
+    console.log("7.Exit")
     let choice = util.inputInt();
     
     switch(choice)
@@ -61,6 +62,10 @@ while(i==0)
             break;
 
         case 6:
+            stock.valueOf();
+            break;
+            
+        case 7:
             i++;
             break;
         

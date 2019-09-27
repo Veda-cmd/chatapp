@@ -217,6 +217,34 @@ class LinkedList
 			current=current.next;
 		}
 	}
+
+	popIndex(index)
+	{
+		if(index<0)
+		{
+			console.log("Index is incorrect");
+			return false;
+		}
+		else if(index == 1)
+		{
+			this.deleteFirst();
+			return;
+		}
+		let current = this.head, prev = current,c=0;
+		while(current)
+		{
+			if(c==index-1)
+			{
+				prev.next = curr.next;
+				this.size--;
+				return current.element;
+			}
+			c++;
+			prev = current;
+			current = current.next;
+		}
+		return null;
+	}
 	
 	/**
 	*@description checks the list if empty or not 
@@ -242,7 +270,7 @@ class LinkedList
 
 	printList() 
 	{ 
-		var current = this.head; 
+		var current = this.head.Node; 
 		var str = ""; 
 		while (current) 
 		{ 

@@ -17,7 +17,7 @@ class stockAccount
         {
             totalPrice += this.accountObject.Stock[i].price;
         }
-        console.log(totalPrice);
+        console.log(`Total value of stock account is ${totalPrice}`);
     }
 
     buy(quantity,name)

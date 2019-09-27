@@ -24,22 +24,28 @@ while(i==0)
             break;
         
         case 2:
-            let array =[];
+            let array = [];
             array = linkedList.printList();
             let curr = this.head,flag = true,n=0;
+            console.log("Enter the name of share:");
+            let name = util.inputString();
 
             while(curr && flag)
             {
-                n++
-                console.log("Enter the name of share:");
-                let name = util.inputString();
+                n++;
                 if(curr.element.symbol == name)
                 {
                     linkedList.popIndex(n);
                     flag = false;
                 }
                 curr = curr.next;
-            }           
+            } 
+            if(flag)
+                console.log("Index not found");
+            console.log("Updated Linked List");
+            array = [];
+            array = linkedList.printList();
+            console.log(array);         
             break;
 
         case 3:

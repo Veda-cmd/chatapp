@@ -7,10 +7,14 @@ regex = () =>
     Thank you BridgeLabz,01/01/2016.`
     let string1;
 
-    let name = src.inputString(),
-      fullName = src.inputString(),
-      number = src.inputInt(),
-      date = src.inputString();
+    console.log("Enter your first name:");
+    let name = src.inputString();
+    console.log("Enter your full name:");
+    let fullName = src.inputString();
+    console.log("Enter your phone number:");
+    let number = src.inputInt();
+    console.log("Enter your date(Format:dd/mm/yyyy):");
+    let date = src.inputString();
 
     let namePattern = /^[a-zA-Z]{1,15}$/;
     let fullNamePattern = /^[a-zA-Z ]{1,40}$/;
