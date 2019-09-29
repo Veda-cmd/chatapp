@@ -19,6 +19,7 @@
 
 const fs = require('fs');
 var src = require('../utility/linkedlistUtil.js');
+var util = require("../utility/util.js");
 
 /**
 *@description IIFE(Immediately Invoked Function Execution) this anonymous function is executed right
@@ -37,7 +38,8 @@ var src = require('../utility/linkedlistUtil.js');
 	var text = fs.readFileSync('./input.txt','utf8');
 	// var string = "string";
 	var c = text.split(" ");
-	var linkedlist = new src.LinkedList(); 
+	var linkedlist = new src.LinkedList();
+	let j = 10;
 
 	for(var i = 0;i<c.length;i++)
 	{
@@ -45,18 +47,24 @@ var src = require('../utility/linkedlistUtil.js');
 	}    
 	 
 	linkedlist.printList();
-	linkedlist.removeElement('end');
-	linkedlist.removeElement('sun');
-	linkedlist.removeElement('owl');
-	linkedlist.removeElement('monday');
-	linkedlist.removeElement('end');
+	
+	while(j>0)
+	{
+		console.log('Enter number to be searched:');
+		let search = util.inputInt();
+		if(search)
+			linkedlist.removeElement(search);
+		else
+			return false;
+		linkedlist.printList();
+		j--;
+	}
 
 	/**
 	*@description variables output and outputFile are used for storing results
 	*/
 
 	var output = linkedlist.printList();
-	console.log(output);
 	var outputFile = fs.writeFileSync("./output/unorderedlist.txt",output);
 })();
 

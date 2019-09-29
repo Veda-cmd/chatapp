@@ -17,7 +17,8 @@
 *@var src imports other files for execution of program.
 */
 
-var src = require("../utility/stackUtil.js")
+var src = require("../utility/stackUtil.js"),
+	util = require("../utility/util.js");
 
 /**
 *@description Function takes array of given expression and determines whether the expression
@@ -42,10 +43,13 @@ balancedParantheses = (exp) =>
 
 	for(let i=0;i<exp.length;i++)
 	{
-		if(exp[i] == '(' || exp[i] == '{' || exp == '[')
+		if(exp[0] != '(' && exp[0] != '{' && exp[0] != '[')
+			return false;
+
+		if(exp[i] == '(' || exp[i] == '{' || exp[i] == '[')
 			stack.push(exp[i]);
 
-		if(exp[i] == ')' || exp[i] == '}' || exp == ']')
+		if(exp[i] == ')' || exp[i] == '}' || exp[i] == ']')
 		{
 			if(stack.isEmpty())
 				return false;
@@ -87,7 +91,10 @@ isMatched = (element1, element2) =>
 
 (main = () =>
 {
-	var exp = "(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3)";
+	console.log("Enter string:");
+	var exp = util.inputString();
+	if(!exp)
+		return false;
 
 	if(balancedParantheses(exp.split("")))
 		console.log("Expression is balanced.");

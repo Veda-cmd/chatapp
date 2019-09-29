@@ -18,6 +18,7 @@
 */
 
 const fs = require('fs');
+var util = require('../utility/util.js');
 var src = require('../utility/linkedlistUtil.js');
 
 // var text = fs.readFileSync('./input.txt','utf8');
@@ -151,23 +152,32 @@ class hashTable
 */
 
 let ht = new hashTable();
-ht.add(12);
-ht.remove(12);
-ht.add(77);
-ht.add(66);
-ht.add(55);
-ht.add(44);
-ht.add(33);
-ht.add(24);
-ht.add(27);
-ht.add("  ");
-ht.remove("  ");
-ht.remove(36);
-ht.remove(47);
-ht.add(48);
-ht.add(118);
-ht.remove(24);
-ht.remove(35);
-var res = ht.print();
 
-var outputFile = fs.writeFileSync("./output/hash.txt",res);
+while(true)
+{
+	console.log("*********WELCOME TO HASHING PROGRAM*********");
+	console.log("1.Add\n2.Remove\n3.Display\n4.Exit");
+	let choice = util.inputInt();
+	switch(choice)
+	{
+		case 1:
+			console.log("Enter the value you want to add");
+			let value = util.inputInt();
+			ht.add(value);
+			break;
+
+		case 2:
+			console.log("Enter the value you want to remove");
+			let value1 = util.inputInt();
+			ht.add(value1);
+			break;
+
+		case 3:
+			let res = ht.print(),
+			outputFile = fs.writeFileSync("./output/hash.txt",res);
+			break;
+
+		case 4:
+			return false;
+	}
+}

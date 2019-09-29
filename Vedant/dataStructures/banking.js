@@ -44,6 +44,7 @@ cashBalance = () =>
 			count = 0, i = 0;
 	console.log("-----------------------------------");
 	console.log("Welcome to the Banking Program");
+	console.log(`Initial Balance is ${initialBalance}`);
 
 	/**
 	*@description while loop runs until user enters 3 as choice.

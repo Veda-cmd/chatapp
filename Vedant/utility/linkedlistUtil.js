@@ -180,7 +180,7 @@ class LinkedList
 				prev = current; 
 				current = current.next; 
 			}
-			console.log('Share not found');
+			this.add(element);
 			return -1; 
 		}
 		catch(err){
@@ -270,7 +270,7 @@ class LinkedList
 
 	printList() 
 	{ 
-		var current = this.head.Node; 
+		var current = this.head; 
 		var str = ""; 
 		while (current) 
 		{ 
