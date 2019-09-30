@@ -1,9 +1,34 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node clinique.js 
+*
+*Purpose      :  To manage Clinic using add,search and print report.
+*
+*@description  
+*
+*@file        :  clinique.js 
+*@overview    :  Clinic module to manage Clinic using add,search and print report.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var util imports other files for execution of program.
+*@const fs imports File System module.
+*@var {Object} converts buffer stream into JSON object.
+*/
+
 const fs = require("fs");
 var util = require("../util");
 var list = fs.readFileSync(__dirname+"/clinic.json");
 var clinic = JSON.parse(list);
 
 class Clinic {
+
+    /**
+    *@description intitalizes an array and display function.
+    */
+
     constructor() {
         this.appointments = [];
         this.display = () => {
@@ -11,7 +36,16 @@ class Clinic {
         }
     }
 
+    /**
+    *@description Allows patient to take a appointment with doctor.
+    */
+
     add() {
+
+        /**
+        *@description Asks for user inputs and checks whether record is present in list. 
+        */
+
         console.log(clinic.Patient);
         console.log("Enter name of Patient from above list:");
         let patient = util.inputString(), match = false;
@@ -57,6 +91,10 @@ class Clinic {
             return;
         }
 
+        /**
+        *@description The following code handles the part where a doctor can have max. 5 patients a day.  
+        */
+
         for (let k = 0; k < this.appointments.length; k++) {
             if (this.appointments[k].doctor == doctor)
                 temp++;
@@ -72,16 +110,30 @@ class Clinic {
 
     }
 
+    /**
+    *@description Searches a record of either Patient or Doctor depending on user input.
+    */
+
     search() {
         console.log("Choose the option you want:")
         console.log("1.Search Doctor\n2.Search Patient");
         let choice = util.inputInt();
+
+        /**
+        *@description if loop is used to execute the entered choice.
+        */
+
         if (choice == 1) 
         {
             console.log("****************DOCTOR SEARCH********************");
             console.log("Choose the option you want to search:");
             console.log("1.Search by Name\n2.Search by ID\n3.Search by Specialization\n4.Search by Availability");
             let option = util.inputInt();
+
+            /** 
+            *@description switch statement is used to execute the selected choice. 
+            */
+
             switch (option) {
                 case 1:
                     for (let i = 0; i < clinic.Doctor.length; i++) {
@@ -159,6 +211,11 @@ class Clinic {
             console.log("Choose the option you want to search:");
             console.log("1.Search by Name\n2.Search by ID\n3.Search by Mobile No.\n4.Search by Age");
             let option = util.inputInt();
+
+            /** 
+            *@description switch statement is used to execute the selected choice. 
+            */
+            
             switch (option) {
                 case 1:
                     for (let i = 0; i < clinic.Patient.length; i++) {
@@ -237,6 +294,10 @@ class Clinic {
         else
             console.log("Incorrect choice entered");
     }
+
+    /**
+    *@description Prints Doctor-Patient report.
+    */
 
     display() {
         this.display();

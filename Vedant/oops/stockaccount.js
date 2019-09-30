@@ -1,6 +1,28 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node stockaccount.js 
+*
+*Purpose      :  To manage Stock Account using buy,sell,display and save methods.
+*
+*@description  
+*
+*@file        :  stockaccount.js 
+*@overview    :  stockAccount module to manage Stock Account using buy,sell,display and save methods.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var src,util imports other files for execution of program.
+*/
 
 var src = require("../utility/oops/stockaccountutil");
 var util = require("../utility/util");
+
+/**
+*@description Store object of stockAccount class.
+*@var {Object} stock
+*/
 
 var stock = new src.stockAccount(),
     i=0;
@@ -17,6 +39,10 @@ while(i==0)
     console.log("7.Exit")
     let choice = util.inputInt();
     
+    /** 
+    *@description switch statement is used to execute the selected choice. 
+    */
+
     switch(choice)
     {
         case 1:

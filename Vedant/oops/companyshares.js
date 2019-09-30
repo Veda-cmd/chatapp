@@ -1,3 +1,23 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node companyshares.js 
+*
+*Purpose      :  To manage shares using add,remove,display and save methods.
+*
+*@description  
+*
+*@file        :  companyshares.js  
+*@overview    :  module to manage shares using add,remove,display and save methods.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var fs,util,listUtil imports other files for execution of program.
+*@var {Object}linkedList Stores object of LinkedList.
+*@var {Date} date Stores date object.
+*/
+
 const fs = require("fs");
 var util = require("../utility/util"),
  listUtil = require("../utility/linkedlistUtil"),
@@ -11,6 +31,9 @@ while(i==0)
     console.log("1.Add Share\n2.Remove Share\n3.Display List\n4.Save List\n5.Exit");
     let choice = util.inputInt()
 
+    /** 
+    *@description switch statement is used to execute the selected choice. 
+    */
 
     switch(choice)
     {

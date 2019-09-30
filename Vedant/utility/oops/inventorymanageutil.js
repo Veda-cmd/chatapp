@@ -1,10 +1,36 @@
+/********************************************************************************************
+*Execution    :  default node     cmd> node inventorymanageutil.js 
+*
+*Purpose      :  To allow user to add and delete items in inventory.
+*
+*@description  
+*
+*@file        :  inventorymanageutil.js 
+*@overview    :  inventoryFactory module to allow user to add and delete items in inventory.
+*@author	  :  Vedant Nare <vedant.nare04@gmail.com>
+*@version     :  1.0
+*********************************************************************************************/ 
+
+/**
+*@description Dependencies require to be installed before the execution of this file.
+*@var src imports other files for execution of program.
+*@const fs imports File System module for execution of program.
+*/
+
 var src = require("../util.js");
 const fs = require("fs");
 
 class inventoryFactory 
 {
     inventoryFactory(obj) {
-        let object = JSON.parse(obj), i = 0;
+
+        /**
+        *@description Converts buffer stream into JSON object.
+        *@let {Object} object 
+        */
+
+        let object = JSON.parse(obj), 
+            i = 0;
         while (i == 0) {
             console.log("WELCOME TO INVENTORY DATA MANAGEMENT PROGRAM");
             console.log(object);
@@ -14,6 +40,10 @@ class inventoryFactory
             console.log("Please select the option you want:");
             let choice = src.inputInt();
 
+            /** 
+	        *@description switch statement is used to execute the selected choice. 
+	        */
+
             switch (choice) {
                 case 1:
                     console.log("Select the inventory you want to insert:");
@@ -21,6 +51,11 @@ class inventoryFactory
                     console.log("2.Pulses");
                     console.log("3.Wheat");
                     let option = src.inputInt();
+
+                    /** 
+                    *@description switch statement is used to execute the selected choice. 
+                    */
+
                     switch (option) {
                         case 1:
                             if (object.Rice) {
@@ -92,6 +127,10 @@ class inventoryFactory
                     console.log("3.Wheat");
                     let option1 = src.inputInt();
 
+                    /** 
+                    *@description switch statement is used to execute the selected choice. 
+                    */
+                   
                     switch (option1) {
                         case 1:
                             console.log(object);
