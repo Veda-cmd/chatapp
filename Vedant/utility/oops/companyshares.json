@@ -1,9 +1,0 @@
-{
-    "list":[
-        {"name":"Microsoft","quantity":800,"price":200},
-        {"name":"Amazon","quantity":700,"price":300},
-        {"name":"Google","quantity":500,"price":400},
-        {"name":"Flipkart","quantity":360,"price":150},
-        {"name":"BridgeLabz","quantity":275,"price":50}
-    ]
-}
