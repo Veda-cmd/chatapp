@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Replace Username</title>
+</head>
+<body>
+	<p id="userid">Hello UserName, How are you?</p>
+	<button onclick="myUser()"> Click to replace</button>	
+	<script type="text/javascript">
+		function myUser()
+		{
+		  var str = document.getElementById('userid').innerHTML;
+		  var username = prompt('Enter username');
+		  if (username.length > 2)
+		    {
+			  var rep = str.replace("UserName", username);
+			  document.getElementById('userid').innerHTML = rep;
+		    }
+		  else{
+		  	alert('Please enter username of more than 2 characters');
+		  }  
+	    }
+	</script>  
+
+</body>
+</html>

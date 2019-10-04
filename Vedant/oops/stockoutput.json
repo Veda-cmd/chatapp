@@ -1,0 +1,14 @@
+{
+    "Stock": [
+        {
+            "name": "Google",
+            "quantity": 10,
+            "price": 400
+        },
+        {
+            "name": "Flipkart",
+            "quantity": 60,
+            "price": 150
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Google",
+        "number": 500,
+        "price": 15000
+    },
+    {
+        "name": "Tesla",
+        "number": 500,
+        "price": 20000
+    }
+]
