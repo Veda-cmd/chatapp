@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+    <head>
+        <title>Home</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
+    </head>
+    <body>
+        <a ui-sref="login">Login</a>
+        <a ui-sref='register'>Register</a>
+        <div ui-view></div>
+        <script src="app.js"></script>
+        <script src="/client/controllers/userController.js"></script>
+        <script src="/client/services/userService.js"></script>
+    </body>
+</html>
