@@ -17,14 +17,14 @@ app.config(function($stateProvider,$urlRouterProvider)
     })
     .state('reset',
     {
-        url:"/reset",
-        templateUrl:"templates/resetPass.html",
+        url:"/reset/:token",
+        templateUrl:"templates/resetPassword.html",
         controller: "resetController"
     })
-    .state('change',
+    .state('forgot',
     {
-        url:"/change",
-        templateUrl:"templates/changePass.html",
-        controller: "changeController"
+        url:"/forgot",
+        templateUrl:"templates/forgotPassword.html",
+        controller: "forgotController"
     })
 })

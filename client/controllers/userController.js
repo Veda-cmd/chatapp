@@ -1,4 +1,4 @@
-app.controller("loginController", function($scope,userService)
+app.controller("loginController", function($scope,$window,userService)
 {
    $scope.submit = () =>
    {
@@ -9,10 +9,11 @@ app.controller("loginController", function($scope,userService)
       userService.login(data).
       then(function(response)
       {
-         console.log(response);
+         alert('Login successful');
+         console.log(response.data)
       }).catch(function(response)
       {
-         console.log(response);
+         console.log(response.data);
       })
    }
 
@@ -31,10 +32,52 @@ app.controller("registerController", function($scope,userService)
       userService.register(data).
       then(function(response)
       {
-         console.log(response);
+         alert('Registration successful');
+         console.log(response.data);
       }).catch(function(response)
       {
-         console.log(response);
+         console.log(response.data);
+      })
+   }
+
+});
+
+app.controller("forgotController", function($scope,userService)
+{
+   $scope.submit = () =>
+   {
+      var data = {
+         email : $scope.username,
+      }
+      userService.forgotPassword(data).
+      then(function(response)
+      {
+         alert('New Password entered successful');
+         console.log(response.data);
+      }).catch(function(response)
+      {
+         console.log(response.data);
+      })
+   }
+
+});
+
+app.controller("resetController", function($scope,userService)
+{
+   $scope.submit = () =>
+   {
+      var data = {
+         password:$scope.old,
+         password_new:$scope.new
+      }
+      userService.resetPassword(data).
+      then(function(response)
+      {
+         alert('New Password entered successful');
+         console.log(response.data);
+      }).catch(function(response)
+      {
+         console.log(response.data);
       })
    }
 

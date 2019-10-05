@@ -18,4 +18,22 @@ app.service('userService',function($http)
         data: data
     });
    }
+
+   this.forgotPassword = (data) =>
+   {
+    return $http({
+        method : 'POST',
+        url:"http://localhost:3000/forgot",
+        data: data
+    });   
+   }
+
+   this.resetPassword = (data) =>
+   {
+    return $http({
+        method : 'POST',
+        url:"http://localhost:3000/reset",
+        data: data
+    });   
+   }
 })

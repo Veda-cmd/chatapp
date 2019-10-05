@@ -21,6 +21,39 @@ class UserService {
             }
         })
     }
+
+    forgot(body, callback) {
+        
+        userModel.forgot(body, (err, data) => {
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data);
+            }
+        })
+    }
+
+    update(body,callback)
+    {
+        userModel.update(body,(err,data)=>{
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data);
+            }
+        })
+    }
+
+    reset(body,callback)
+    {
+        userModel.reset(body,(err,data)=>{
+            if (err) {
+                callback(err)
+            } else {
+                callback(null, data);
+            }
+        })
+    }
 }
 
 module.exports = new UserService();

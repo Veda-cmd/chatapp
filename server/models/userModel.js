@@ -12,7 +12,9 @@ const dbName = 'chat-app';
 MongoClient.connect(url, function(err, client) {
   assert.equal(null, err);
   db = client.db(dbName);
+  collection = db.collection('users'); 
 });
+
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -30,40 +32,54 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         required:true
-    }
+    },
+    forgot_token:{
+        type: String,
+        required:false
+    },
+    created_at: Date,
+    updated_at: Date
+   
 });
 const User =  mongoose.model('user',userSchema);
 
 class UserModel{
     create(body, callback)
     {
-
-        bcrypt.hash(body.password,10,(err,hash)=>
+        collection.findOne({email:body.email},(err,result)=>
         {
             if(err)
-                throw err;
-            const user = new User({
-                firstName: body.firstName,
-                lastName: body.lastName,
-                email: body.email,
-                password: hash
-            })
-            user.save((err, data) => {
-                if(err){
-                    callback(err)
-                }else{
-                    callback(null, data)
-                }
-            })
-        })
+                callback(err)
+            else if(result)
+                callback({message:'Email already registered'})
+            else
+            {
+                bcrypt.hash(body.password,10,(err,hash)=>
+                {
+                    if(err)
+                        throw err;
+                    const user = new User({
+                        firstName: body.firstName,
+                        lastName: body.lastName,
+                        email: body.email,
+                        password: hash
+                    })
+                    user.save((err, data) => {
+                        if(err){
+                            callback(err)
+                        }else{
+                            callback(null, data)
+                        }
+                    })
+                })
+            }                
+        })      
     }
 
     login(body,callback)
     {   
-        let collection = db.collection('users'); 
         collection.findOne({email:body.email}, (err,result) =>
-        {
-            
+        {      
             if(err)
                 callback(err)
             else if(!result)
@@ -75,10 +91,7 @@ class UserModel{
                    if(err)
                         callback(err);
                     else if(res)
-                    {
-                        console.log("Login successful");
-                        callback(null,res);
-                    } 
+                        callback(null,{message:"Login succesful"});
                     else
                     {
                         console.log("Login Failed");
@@ -87,8 +100,74 @@ class UserModel{
                 })
             }
         })
-
-    
     }
+
+    forgot(body, callback)
+    {
+        collection.findOne({email:body.email},(err,result)=>
+        {
+            if(err)
+                callback(err);
+            else if(result)
+                callback(null,result);
+            else
+                callback({message:"User not found"});
+                         
+        })   
+    }
+
+    update(body, callback)
+    {
+        collection.updateOne({_id:body.id},{$set:{forgot_token:body.verify_token}},(err,result)=>
+        {
+            if(err)
+                callback(err);
+            else if(result)
+                callback(null,result);                         
+        })   
+    }
+
+    reset(body, callback)
+    {
+        collection.findOne({forgot_token:body.token},(err,result)=>
+        {
+            if(err)
+                callback(err);
+            else if(result)
+            {
+                bcrypt.compare(body.password_old,result.password,(err,res) =>
+                {
+                    console.log(res);
+                    if(err)
+                        callback(err);
+                    else if(res)
+                    {
+                        bcrypt.hash(body.password_new,10,(err,hash)=>
+                        {
+                            if(err)
+                                throw err;
+                            else
+                            {
+                                collection.updateOne({_id:result._id},{$set:{password:hash}},(error,data)=>
+                                {
+                                    if(error)
+                                        callback(error);
+                                    else
+                                        callback({message:"Updated successfully"});
+                                })
+                            }
+                        })
+                    }
+                    else
+                    {
+                        console.log("Login Failed");
+                        callback({message:"Wrong password entered"});
+                    }
+                })
+            }                       
+        })   
+    }
+
 }
+
 module.exports = new UserModel();
