@@ -40,7 +40,6 @@ class UserController {
         })
         promise.then(data =>
             {
-
                 res.status(200).send(data);
             }) 
             .catch(err =>
@@ -60,7 +59,7 @@ class UserController {
             if (err)
                 res.status(422).send(err);
             else
-            {
+            {   
                 let payload = {email:data.email},
                 result = mail.generateToken(payload),
                 req={
@@ -68,14 +67,13 @@ class UserController {
                     verify_token:result
                 };
                 service.update(req,(err,data)=>
-                {
+                {   
                     if(err)
                         res.status(422).send(err);
                     else
                     {
                         let url = 'http://127.0.0.1:5500/client/#!/reset/'+result;
-                        console.log(url);
-                        mail.sendLink(url);
+                        mail.sendLink(url,payload);
                         res.status(200).send(data);
                     }
                 })
@@ -85,18 +83,23 @@ class UserController {
 
     reset(req, res) 
     {
-        // req.check('email','Invalid email').isEmail();
-        // const errors = req.validationErrors();
-        // if (errors) 
-        //     return res.status(422).json({ errors: errors });
+        req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+        req.check('password_new','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+        const errors = req.validationErrors();
+        if (errors) 
+            return res.status(422).json({ errors: errors });
+
         let result={
-            token:req.headers.token,
+            token:req.body.token,
             password_old:req.body.password,
-            password_new:req.body.password1
+            password_new:req.body.password_new
         }
         service.reset(result, (err, data) => {   
-            if (err)
+            if (err){
+                console.log("error in con 99--", err);
+                
                 res.status(422).send(err);
+            }
             else
                 res.status(200).send(data);
         })

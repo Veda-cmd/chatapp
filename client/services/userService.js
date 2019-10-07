@@ -36,4 +36,5 @@ app.service('userService',function($http)
         data: data
     });   
    }
+
 })

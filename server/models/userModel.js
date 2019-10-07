@@ -37,8 +37,14 @@ const userSchema = mongoose.Schema({
         type: String,
         required:false
     },
-    created_at: Date,
-    updated_at: Date
+    created_at: {
+        type: Date,
+        default: Date.now 
+    },
+    updated_at: {
+        type: Date,
+        default: Date.now 
+    }
    
 });
 const User =  mongoose.model('user',userSchema);
@@ -116,14 +122,17 @@ class UserModel{
         })   
     }
 
-    update(body, callback)
+    updateToken(body, callback)
     {
         collection.updateOne({_id:body.id},{$set:{forgot_token:body.verify_token}},(err,result)=>
-        {
+        {             
             if(err)
                 callback(err);
             else if(result)
-                callback(null,result);                         
+            {
+                callback(null,result); 
+            }
+                                        
         })   
     }
 
@@ -137,7 +146,6 @@ class UserModel{
             {
                 bcrypt.compare(body.password_old,result.password,(err,res) =>
                 {
-                    console.log(res);
                     if(err)
                         callback(err);
                     else if(res)
@@ -150,10 +158,13 @@ class UserModel{
                             {
                                 collection.updateOne({_id:result._id},{$set:{password:hash}},(error,data)=>
                                 {
-                                    if(error)
+                                    if(error){
+                                    console.log("error 162", error);
+                                    
                                         callback(error);
+                                    }
                                     else
-                                        callback({message:"Updated successfully"});
+                                        callback(null,{message:"Updated successfully"});
                                 })
                             }
                         })

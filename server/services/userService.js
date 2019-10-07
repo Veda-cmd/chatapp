@@ -35,7 +35,7 @@ class UserService {
 
     update(body,callback)
     {
-        userModel.update(body,(err,data)=>{
+        userModel.updateToken(body,(err,data)=>{
             if (err) {
                 callback(err)
             } else {
@@ -48,6 +48,8 @@ class UserService {
     {
         userModel.reset(body,(err,data)=>{
             if (err) {
+                console.log('err at service: ', err);
+                
                 callback(err)
             } else {
                 callback(null, data);

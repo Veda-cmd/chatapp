@@ -2,8 +2,9 @@ require('dotenv').config();
 var nodemailer = require('nodemailer');
 let jwt = require('jsonwebtoken');
 
-sendLink = (url) =>
+sendLink = (url,req) =>
 {
+
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -14,7 +15,7 @@ sendLink = (url) =>
 
   let mailOptions = {
     from: process.env.email_id,
-    to: 'vedant.nare04@gmail.com',
+    to: req.email,
     subject: 'Forget password link',
     text: 'Click on the following link to reset.\n'+url
   };
