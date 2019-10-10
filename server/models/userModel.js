@@ -97,7 +97,16 @@ class UserModel{
                    if(err)
                         callback(err);
                     else if(res)
-                        callback(null,{message:"Login succesful"});
+                    {   
+                        let res = {
+                            id:result._id,
+                            firstName:result.firstName,
+                            lastName:result.lastName,
+                            email:result.email
+                        }
+                        callback(null,res);
+                    }
+                       
                     else
                     {
                         console.log("Login Failed");
@@ -158,13 +167,10 @@ class UserModel{
                             {
                                 collection.updateOne({_id:result._id},{$set:{password:hash}},(error,data)=>
                                 {
-                                    if(error){
-                                    console.log("error 162", error);
-                                    
+                                    if(error)                                    
                                         callback(error);
-                                    }
                                     else
-                                        callback(null,{message:"Updated successfully"});
+                                        callback(null,{message:"Password updated successfully"});
                                 })
                             }
                         })
@@ -177,6 +183,17 @@ class UserModel{
                 })
             }                       
         })   
+    }
+
+    getAllUsers(body,callback)
+    {
+        User.find((err,result)=>
+        {
+            if(err)
+                callback(err)
+            else
+                callback(null,result);
+        })
     }
 
 }

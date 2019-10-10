@@ -1,0 +1,24 @@
+<span>List of Available Users</span>
+<div class="nav">
+    <ul ng-repeat="item in users" ng-click="getUser(item)">
+        <a>{{ item.firstName }}</a>
+    </ul>
+</div>
+<div class="username">
+    <h1 ng-model="username">{{username}}</h1>
+</div>
+<div ng-repeat="item in array" ng-click="null">
+    <div class="sender">
+        <p>{{ item.data.input }}</p>
+        <p>{{ item.date | date:'medium'}}</p>
+    </div>
+</div>
+
+<div class="chatarea"> 
+    <input class="message" ng-model="message.input">
+    <button ng-click="add()">Send</button> 
+</div>
+
+
+
+

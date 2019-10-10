@@ -11,12 +11,12 @@ a{
     border-radius: 5px; 
 }
 
-
-div{
+.login, .register, .reset, .forgot{
     padding: 0;
     margin-top: 50px;
     text-align: center; 
 }
+
 input {
     padding:5px;
     margin:5px; 
@@ -40,4 +40,42 @@ button{
     font-size: 16px;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
+}
+span{
+    text-align: left;
+    margin-top: 5px;
+}
+ul{
+    width:40px;
+    padding-left: 0pt;
+}
+
+.nav{
+    width: 145px;
+    height: 500px;
+    overflow-y: scroll;
+    margin-top: 25px;
+}
+.message{
+    width: 900px;
+    border: 1px solid black
+}
+.chatarea{
+position: absolute;
+margin-top: 600px;
+margin-left: 150px;
+}
+
+.sender{
+    position: relative;
+    margin-left: 90%;
+}
+.username{
+    position: absolute;
+    margin-left: 180px;
+}
+
+span,.nav{
+    float: left;
+    clear: left;
 }

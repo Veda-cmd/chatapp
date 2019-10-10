@@ -1,108 +1,152 @@
 require('dotenv').config();
 const service = require('../services/userService');
-const mail = require('../util/mail');
+const auth = require('../auth/auth');
 
 class UserController {
     register(req, res) 
     {
-        req.check('email','Invalid email').isEmail();
-        req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
-        const errors = req.validationErrors();
-        if (errors) {
-            return res.status(422).json({ errors: errors })
-          }
+        try
+        {
+            req.check('email','Invalid email').isEmail();
+            req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.status(422).json({ errors: errors })
+            }
 
-        service.register(req.body, (err, data) => {
-            if (err)
-                res.status(422).send(err);
-            else
-                res.status(200).send(data);
-        })
+            service.register(req.body, (err, data) => {
+                if (err)
+                    res.status(422).send(err);
+                else
+                    res.status(200).send(data);
+            });
+        }
+        catch(err){
+            console.log("Error: "+err);
+        }
+        
     }
 
     login(req,res)
     {
-        req.check('email','Invalid email').isEmail();
-        req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
-        const errors = req.validationErrors();
-        if (errors) {
-            return res.status(422).json({ errors: errors })
-          }
-            
-        var promise = new Promise((resolve,reject)=>
+        try
         {
-            service.login(req.body, (err, data) => {
-                if (err)
-                  reject(err);
-                else
-                  resolve(data);                    
-            })        
-        })
-        promise.then(data =>
+            req.check('email','Invalid email').isEmail();
+            req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.status(422).json({ errors: errors })
+            }
+                
+            var promise = new Promise((resolve,reject)=>
             {
-                res.status(200).send(data);
-            }) 
-            .catch(err =>
-            {                
-                res.status(422).send(err);
-            })             
+                service.login(req.body, (err, data) => {
+                    if (err)
+                    reject(err);
+                    else
+                    resolve(data);                    
+                })        
+            })
+            promise.then(data =>
+                {
+                    res.status(200).send(data);
+                }) 
+                .catch(err =>
+                {                
+                    res.status(422).send(err);
+                })
+        }    
+        catch(err)
+        {
+            console.log("Error: "+err);
+        }        
     }
 
     forgot(req, res) 
     {
-        req.check('email','Invalid email').isEmail();
-        const errors = req.validationErrors();
-        if (errors) 
-            return res.status(422).json({ errors: errors });
+        try
+        {
+            req.check('email','Invalid email').isEmail();
+            const errors = req.validationErrors();
+            if (errors) 
+                return res.status(422).json({ errors: errors });
 
-        service.forgot(req.body, (err, data) => {
-            if (err)
-                res.status(422).send(err);
-            else
-            {   
-                let payload = {email:data.email},
-                result = mail.generateToken(payload),
-                req={
-                    id:data._id,
-                    verify_token:result
-                };
-                service.update(req,(err,data)=>
+            service.forgot(req.body, (err, data) => {
+                if (err)
+                    res.status(422).send(err);
+                else
                 {   
-                    if(err)
-                        res.status(422).send(err);
-                    else
-                    {
-                        let url = 'http://127.0.0.1:5500/client/#!/reset/'+result;
-                        mail.sendLink(url,payload);
-                        res.status(200).send(data);
-                    }
-                })
-            }
-        }) 
+                    let payload = {email:data.email},
+                    result = auth.generateToken(payload),
+                    req={
+                        id:data._id,
+                        verify_token:result
+                    };
+                    service.update(req,(err,data)=>
+                    {   
+                        if(err)
+                            res.status(422).send(err);
+                        else
+                        {
+                            let url = 'http://localhost:3000/#!/reset/'+result;
+                            service.sendLink(url,payload);
+                            res.status(200).send(data);
+                        }
+                    })
+                }
+            }) 
+        }
+        catch(err)
+        {
+            console.log("Error: "+err);
+        } 
+        
     }
 
     reset(req, res) 
     {
-        req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
-        req.check('password_new','Invalid password').isLength({ min: 6 }).isAlphanumeric();
-        const errors = req.validationErrors();
-        if (errors) 
-            return res.status(422).json({ errors: errors });
-
-        let result={
-            token:req.body.token,
-            password_old:req.body.password,
-            password_new:req.body.password_new
-        }
-        service.reset(result, (err, data) => {   
-            if (err){
-                console.log("error in con 99--", err);
-                
-                res.status(422).send(err);
+        try
+        {
+            req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+            req.check('password_new','Invalid password').isLength({ min: 6 }).isAlphanumeric();
+            const errors = req.validationErrors();
+            if (errors) 
+                return res.status(422).json({ errors: errors });
+    
+            let result={
+                token:req.body.token,
+                password_old:req.body.password,
+                password_new:req.body.password_new
             }
-            else
-                res.status(200).send(data);
-        })
+            service.reset(result, (err, data) => {   
+                if (err)
+                    res.status(422).send(err);
+                else
+                    res.status(200).send(data);
+            });
+        }
+        catch(err)
+        {
+            console.log("Error: "+err);
+        } 
+       
+    }
+
+    getAllUsers(req,res)
+    {
+        try
+        {
+            service.getAllUsers(req,(err,data)=>{
+                if(err)
+                    res.status(422).send(err);
+                else
+                    res.status(200).send(data);
+            })
+        }
+        catch(err)
+        {
+            console.log("Error: "+err);
+        } 
     }
        
 }

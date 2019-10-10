@@ -1,4 +1,11 @@
 var jwt = require('jsonwebtoken');
+
+generateToken = (payload) =>
+{
+  let token = jwt.sign(payload, 'secret',{ expiresIn: '24h'});
+  return token;
+}
+
 checkToken=(req,res,next)=>{
     var bearerHeader = req.body.token;
     req.authenticated = false;
@@ -17,5 +24,5 @@ checkToken=(req,res,next)=>{
         });
     }
 }
-module.exports={checkToken}
+module.exports={checkToken,generateToken}
 

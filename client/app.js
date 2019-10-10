@@ -1,7 +1,7 @@
-var app = angular.module("myApp",['ui.router']);
+var app = angular.module("myApp",['ui.router','btford.socket-io']);
 app.config(function($stateProvider,$urlRouterProvider)
 {
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/login");
     $stateProvider
     .state('login',
     {
@@ -26,5 +26,11 @@ app.config(function($stateProvider,$urlRouterProvider)
         url:"/forgot",
         templateUrl:"templates/forgotPassword.html",
         controller: "forgotController"
+    })
+    .state('dashboard',
+    {
+        url:'/dashboard',
+        templateUrl:'templates/dashboard.html',
+        controller:'chatController'
     })
 })

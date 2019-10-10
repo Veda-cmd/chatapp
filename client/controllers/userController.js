@@ -16,16 +16,20 @@ app.controller("loginController", function($scope,$window,userService)
       then(function(response)
       {
          alert('Login successful');
-         console.log(response.data)
+         console.log(response.data);   
+         localStorage.setItem('UserID',response.data.id);
+         localStorage.setItem('Username',response.data.firstName);
+         $window.location.href = 'http://localhost:3000/#!/dashboard';  
       }).catch(function(response)
       {
-         console.log(response.data);
+         alert('Email/password is incorrect');
+         console.log(response);
       })
    }
 
 });
 
-app.controller("registerController", function($scope,userService)
+app.controller("registerController", function($scope,$window,userService)
 {
    $scope.submit = () =>
    {
@@ -38,13 +42,16 @@ app.controller("registerController", function($scope,userService)
          email : $scope.username,
          password : $scope.password
       }
+
       userService.register(data).
       then(function(response)
-      {
-         alert('Registration successful');
+      {  
+         alert('Registration successful'); 
          console.log(response.data);
+         $window.location.href = 'http://localhost:3000/#!/login';
       }).catch(function(response)
-      {
+      {  
+         alert('Registration unsuccessful');
          console.log(response.data);
       })
    }
@@ -68,7 +75,7 @@ app.controller("forgotController", function($scope,userService)
          console.log(response);
       }).catch(function(response)
       {
-         console.log(response.data);
+         console.log(response);
       })
    }
 
@@ -94,24 +101,9 @@ app.controller("resetController", function($scope,$stateParams,userService)
          console.log(response.data);
       }).catch(function(response)
       {
+         alert('Password reset unsuccessful');
          console.log(response.data);
       })
    }
 });
 
-app.controller("verifyController", function($scope,$stateParams,userService)
-{
-   $scope.token = $stateParams.token;
-   var data = {
-      token:$scope.token,
-   }
-   userService.verifyMail(data).
-   then(function(response)
-   {
-      alert('Email verification successful');
-      console.log(response.data);
-   }).catch(function(response)
-   {
-      console.log(response.data);
-   })
-});

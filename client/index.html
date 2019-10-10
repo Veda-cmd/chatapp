@@ -2,18 +2,20 @@
 <html ng-app = "myApp">
     <head>
         <title>Home</title>
-        <link rel="stylesheet" type='text/css' href="../client/css/style.css">
-       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+        <link rel="stylesheet" type='text/css' href="/css/style.css">
+        
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.js"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-socket-io/0.7.0/socket.min.js"></script>
+       <script src="app.js"></script>
+       <script src="/controllers/userController.js"></script>
+       <script src="/services/userService.js"></script>
+       <script src="/controllers/chatController.js"></script>
+       <script src="/services/chatService.js"></script>
     </head>
     <body>
-        <div>
-            <a ui-sref="login">Login</a>
-            <a ui-sref='register'>Register</a>
-        </div>
         <div ui-view></div>
-        <script src="app.js"></script>
-        <script src="/client/controllers/userController.js"></script>
-        <script src="/client/services/userService.js"></script>
+       
     </body>
 </html>

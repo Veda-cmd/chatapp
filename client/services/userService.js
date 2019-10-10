@@ -1,4 +1,3 @@
-var app = angular.module("myApp");
 app.service('userService',function($http)
 {
    this.login = (data) =>
@@ -35,6 +34,14 @@ app.service('userService',function($http)
         url:"http://localhost:3000/reset",
         data: data
     });   
+   }
+
+   this.getAllUsers = () =>
+   {
+    return $http({
+        method : 'GET',
+        url:"http://localhost:3000/dashboard",
+    });
    }
 
 })

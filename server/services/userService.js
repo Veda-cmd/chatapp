@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+var nodemailer = require('nodemailer');
 
 class UserService {
     register(body, callback) {
@@ -39,6 +40,7 @@ class UserService {
             if (err) {
                 callback(err)
             } else {
+
                 callback(null, data);
             }
         })
@@ -47,13 +49,47 @@ class UserService {
     reset(body,callback)
     {
         userModel.reset(body,(err,data)=>{
-            if (err) {
-                console.log('err at service: ', err);
-                
+            if (err)             
                 callback(err)
-            } else {
+            else
                 callback(null, data);
-            }
+        })
+    }
+
+    sendLink(url,req)
+    {
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+            user: process.env.email_id,
+            pass: process.env.password
+            } 
+        });
+
+        let mailOptions = {
+            from: process.env.email_id,
+            to: req.email,
+            subject: 'Forget password link',
+            text: 'Click on the following link to reset.\n'+url
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error)
+            console.log(error);
+            else
+            console.log('Email sent: ' + info.response);
+        });
+    }
+
+    getAllUsers(body,callback)
+    {
+        userModel.getAllUsers(body,(err,data)=>
+        {
+            if(err)
+                callback(err)
+            else
+                callback(null,data)
         })
     }
 }
