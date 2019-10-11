@@ -15,10 +15,9 @@ app.controller("loginController", function($scope,$window,userService)
       userService.login(data).
       then(function(response)
       {
-         alert('Login successful');
-         console.log(response.data);   
-         localStorage.setItem('UserID',response.data.id);
-         localStorage.setItem('Username',response.data.firstName);
+         alert('Login successful'); 
+         sessionStorage.setItem('UserID',response.data.id);
+         sessionStorage.setItem('Username',response.data.firstName);
          $window.location.href = 'http://localhost:3000/#!/dashboard';  
       }).catch(function(response)
       {

@@ -26,8 +26,8 @@ const Message =  mongoose.model('message',messageSchema);
 
 class chatModel
 {
-    saveMessage(body,callback)
-    {
+    sendMsg(body,callback)
+    {   
         const message = new Message({
             senderName:body.senderName,
             sender_id:body.senderId,
@@ -41,6 +41,18 @@ class chatModel
                 callback(err)
             else
                 callback(null,data)
+        })
+    }
+
+    getMsg(body,callback)
+    {
+        Message.find((err,data)=>{
+            if(err)
+                callback(err)
+            else{
+                callback(null,data)
+            }
+                
         })
     }
 }

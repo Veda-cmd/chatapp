@@ -45,37 +45,85 @@ span{
     text-align: left;
     margin-top: 5px;
 }
-ul{
-    width:40px;
-    padding-left: 0pt;
+
+
+
+/* Chat Style */
+
+.hstyle{
+    color:rgb(23, 72, 233);
+    padding: 1px;
+    font-style: italic;
 }
 
-.nav{
-    width: 145px;
-    height: 500px;
+.logout{
+    float: right;
+    list-style-type:none;
+    
+    padding-right: 15px;
+}
+.flex {
+    display: flex
+}
+.sidebar {
+    /* background-image: url('../asserts/chat.jpeg'); */
+    width: 30%;
+    height: 650px;
     overflow-y: scroll;
-    margin-top: 25px;
 }
-.message{
-    width: 900px;
-    border: 1px solid black
+.msgspace {
+    /* background-image: url('../asserts/chatback.jpeg'); */
+    width: 80%;
+    height: 650px;
+    margin-top: 0%;
+    overflow-y: scroll;  
 }
-.chatarea{
-position: absolute;
-margin-top: 600px;
-margin-left: 150px;
+.sendbox {
+    
+    margin-top: 50%;
+    height: 78px;
+}
+.inputbox{
+    height:50px;
+    width:80%;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+.sendButton{
+    height:50px;
+    width:100px;
+    color: darkgreen;
+    text-align: center;
 }
 
-.sender{
-    position: relative;
-    margin-left: 90%;
+.userButton{
+    margin-top: 2%;
+    background-color:yellow;
+    width: 100px;
+    height:40px;
 }
-.username{
-    position: absolute;
-    margin-left: 180px;
+.text{
+    background-color: bisque;
+    margin:20px;
+    margin-top: 10px;
 }
-
-span,.nav{
-    float: left;
-    clear: left;
+.rtext{
+    background-color: red;
+    float: right;
+    display: flex;
+    flex: 1 1 auto;
+    margin-right: 5%;
+}
+.ltext{
+    background-color: yellow;
+    float:left;
+    display: flex;
+    flex: 1 1 auto;
+    margin-left: 5%;
+}
+.receiver{
+    text-align: center;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: aquamarine;
 }

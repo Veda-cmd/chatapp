@@ -28,26 +28,26 @@ app.use(express.static('../client'))
 io.on('connection', function(client) 
 {
     console.log("User connected");
-    client.on('disconnect', function() {
-    console.log("User disconnected")
-    });
 
-    client.on('room', function(data) {
-        console.log(data)
-        client.join(data.roomId);
-        console.log(' Client joined the room and client id is '+ client.id);
-    });
+    // client.on('room', function(data) {
+    //     console.log(data)
+    //     client.join(data.roomId);
+    //     console.log(' Client joined the room and client id is '+ client.id);
+    // });
 
-    client.on('toBackEnd', function(data) 
+    client.on('newMsg',(message)=>
     {
-        controller.saveMessage(data,(err,result)=>
-        {
-            if(err)
-                console.log(err);       
-            else
-                console.log(result);            
-        });
-        client.in(data.roomId).emit('message', data);
+        controller.sendMsgControl(message,(err,data)=>
+        {        
+            if(err) 
+                return err   
+            else     
+                return data 
+        })    
+        io.emit(String(message.receiverId),message);
+    })
+    io.on('disconnect', (client) => {
+        console.log("socket disconnected");
     })
 })
 

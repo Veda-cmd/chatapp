@@ -34,3 +34,11 @@ app.config(function($stateProvider,$urlRouterProvider)
         controller:'chatController'
     })
 })
+
+app.service('SocketService', ['socketFactory', function SocketService(socketFactory) {
+    return socketFactory({
+        ioSocket: io.connect('http://localhost:3000/')
+    });
+
+}]);
+

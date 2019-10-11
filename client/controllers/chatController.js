@@ -1,15 +1,22 @@
-app.controller('chatController', function($scope,chatService,userService) 
+app.controller('chatController', function($scope,$location,chatService,userService,SocketService) 
 {
-    $scope.array = [];
-    $scope.message = {};
+    $scope.msgData = [];
+    $scope.currUser = sessionStorage.getItem('Username');
+    $scope.currUserId=sessionStorage.getItem('UserID');
+    let message = document.getElementById('message')
     $scope.getUser = (item) =>
     {
-        localStorage.setItem('receiverID',item._id);
-        localStorage.setItem('receiverName',item.firstName);
-        $scope.username = item.firstName;
+        sessionStorage.setItem('receiverID',item._id);
+        sessionStorage.setItem('receiverName',item.firstName);
+        // $scope.username = item.firstName;
+        $scope.getUserMessage();
+    }
+,
+    $scope.getUserMessage = function () {
+        chatService.getUserMsg($scope);
     }
 
-    chatService.emit('room', { roomId: $scope.id});
+    // chatService.emit('room', { roomId: $scope.id});
 
     userService.getAllUsers().
     then(res=>
@@ -20,21 +27,39 @@ app.controller('chatController', function($scope,chatService,userService)
         {
             console.log(err);
         });
-    
-    let senderName = localStorage.getItem('Username'),
-        senderId = localStorage.getItem('UserID'),
-        receiverName = localStorage.getItem('receiverName'),
-        receiverId = localStorage.getItem('receiverID');
-       
-    console.log(receiverName);    
-    $scope.add = function() {
-        chatService.emit('toBackEnd', {roomId:'temp',sender_Id:senderId,receiver_Id:receiverId,sender:senderName,receiver:receiverName, data: $scope.message, date: new Date() })
-        $scope.array.push({ data: $scope.message, date: new Date() })
+     
+    $scope.sendMsg = function() {
+        let sendMsgData={
+        senderName : sessionStorage.getItem('Username'),
+        senderId : sessionStorage.getItem('UserID'),
+        receiverName : sessionStorage.getItem('receiverName'),
+        receiverId : sessionStorage.getItem('receiverID'),
+        message:$scope.msg
+        }
+        SocketService.emit("newMsg", sendMsgData);
+        $scope.msgData.push(sendMsgData);
     }
 
-    chatService.on('message', function(msg) {
-        console.log(msg);
-        $scope.array.push(msg);
-    });
+    var senderId = sessionStorage.getItem('UserID');
+    SocketService.on(senderId, function (message) {
+        console.log('Message emitted');
+        
+        if (sessionStorage.getItem('receiverID') == message.senderId) 
+        {
+            if ($scope.msgData === undefined) 
+                $scope.msgData = message;
+            else 
+                $scope.msgData.push(message);
+                
+        }
+    })
+
+    $scope.clearTextArea = function () {
+        $scope.msg = '';
+    }
+
+    $scope.logout = function(){
+        $location.path('/login'); 
+    }
 
 })

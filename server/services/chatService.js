@@ -1,10 +1,11 @@
-const chatModel = require('../models/chatModel')
+const chatModels = require('../models/chatModel')
 
-class chatService{
 
-    saveMessage(req,callback)
-    {
-        chatModel.saveMessage(req,(err,data)=>
+class ChatService{
+
+    sendMsgService(msgData,callback){
+        
+        chatModels.sendMsg(msgData,(err,data)=>
         {
             if(err)
                 callback(err)
@@ -12,6 +13,23 @@ class chatService{
                 callback(null,data)
         })
     }
+
+
+    getMsgService(req,callback)
+    {
+                
+        chatModels.getMsg(req,(err,data)=>
+        {
+            if(err)
+                callback(err)
+            else
+                callback(null,data)
+                
+        });
+
+    }
+
+
 }
 
-module.exports = new chatService();
+module.exports = new ChatService();
