@@ -1,4 +1,6 @@
-<div>
+    <!------------------ Chat Template --------------------->
+
+<div class="whole">
     <div class="hstyle">
         <nav>
             <ul>
@@ -7,24 +9,23 @@
             </ul>
         </nav>
     </div>
+    <div class="sidebar">
+        <ul ng-repeat="item in users" ng-click="getUser(item)" ng-show='currUser != item.firstName'>
+            <button class="userButton" type="submit">{{item.firstName}}</button>
+        </ul>
+    </div>
+    <p class="receiver"><b>{{receiverName}}</b></p> 
     <div class="flex">
-        <div class="sidebar">
-            <ul ng-repeat="item in users" ng-click="getUser(item)" ng-show='currUser != item.firstName'>
-                <button class="userButton" type="submit">{{item.firstName}}</button>
-            </ul>
-        </div>
-        <div class="msgspace">
-            <p class="receiver">{{receiverName}}</p>
+        <div class="msgspace" id='message'>
             <div ng-repeat="y in msgData">  
-                <span class="rtext" ng-show="currUserId == y.senderId">{{y.message}}</span><br>
-                <span class="ltext" ng-show="currUserId != y.senderId">{{y.message}}</span><br>   
-            </div>
-
-            <div class="sendbox" autoscroll="true">
-                <input class="inputbox" type="text" id="message" ng-model="msg" name="msg">
-                <button ng-click="sendMsg(msg);clearTextArea()" class="sendButton">Send</button>  
+                <span class="rtext" ng-show="currUserId == y.sender_id">{{y.message}}</span><br>
+                <span class="ltext" ng-show="currUserId != y.sender_id">{{y.message}}</span><br>   
             </div>
         </div>
+    </div>
+    <div class="sendbox">
+        <input class="inputbox" type="text" id="message" ng-model="msg" name="msg" placeholder="Type your message...">
+        <button ng-click="sendMsg(msg);clearTextArea()" class="sendButton">Send</button>  
     </div>
 </div>
 

@@ -1,65 +1,81 @@
 app.controller('chatController', function($scope,$location,chatService,userService,SocketService) 
 {
-    $scope.msgData = [];
-    $scope.currUser = sessionStorage.getItem('Username');
-    $scope.currUserId=sessionStorage.getItem('UserID');
-    let message = document.getElementById('message')
-    $scope.getUser = (item) =>
+    try
     {
-        sessionStorage.setItem('receiverID',item._id);
-        sessionStorage.setItem('receiverName',item.firstName);
-        // $scope.username = item.firstName;
-        $scope.getUserMessage();
-    }
-,
-    $scope.getUserMessage = function () {
-        chatService.getUserMsg($scope);
-    }
+        let messagePattern = /^[\w+\s+]{1,}$/;
+        $scope.msgData = [];
+        $scope.currUser = sessionStorage.getItem('Username');
+        $scope.currUserId=sessionStorage.getItem('UserID');
 
-    // chatService.emit('room', { roomId: $scope.id});
-
-    userService.getAllUsers().
-    then(res=>
+        $scope.getUser = (item) =>
         {
-            $scope.users = res.data;
-        })
-    .catch(err=>
-        {
-            console.log(err);
-        });
-     
-    $scope.sendMsg = function() {
-        let sendMsgData={
-        senderName : sessionStorage.getItem('Username'),
-        senderId : sessionStorage.getItem('UserID'),
-        receiverName : sessionStorage.getItem('receiverName'),
-        receiverId : sessionStorage.getItem('receiverID'),
-        message:$scope.msg
+            sessionStorage.setItem('receiverID',item._id);
+            sessionStorage.setItem('receiverName',item.firstName);
+            $scope.getUserMessage();
         }
-        SocketService.emit("newMsg", sendMsgData);
-        $scope.msgData.push(sendMsgData);
-    }
+    ,
+        $scope.getUserMessage = function () {
+            chatService.getUserMsg($scope);
+            
+        }
 
-    var senderId = sessionStorage.getItem('UserID');
-    SocketService.on(senderId, function (message) {
-        console.log('Message emitted');
+        $scope.updateScroll = function(){
+            var element = document.querySelector('.msgspace');
+            element.scrollTop = element.scrollHeight;
+            console.log('Success',element.scrollTop);  
+        }
+
+        // chatService.emit('room', { roomId: $scope.id});
+
+        userService.getAllUsers().
+        then(res=>
+            {
+                $scope.users = res.data;
+            })
+        .catch(err=>
+            {
+                console.log(err);
+            });
         
-        if (sessionStorage.getItem('receiverID') == message.senderId) 
-        {
-            if ($scope.msgData === undefined) 
-                $scope.msgData = message;
-            else 
-                $scope.msgData.push(message);
-                
+        $scope.sendMsg = function() {
+            if(!messagePattern.test($scope.msg))
+                return;
+            let sendMsgData={
+            senderName : sessionStorage.getItem('Username'),
+            sender_id : sessionStorage.getItem('UserID'),
+            receiverName : sessionStorage.getItem('receiverName'),
+            receiver_id : sessionStorage.getItem('receiverID'),
+            message:$scope.msg
+            }
+            SocketService.emit("newMsg", sendMsgData);
+            $scope.msgData.push(sendMsgData);
+        
         }
-    })
 
-    $scope.clearTextArea = function () {
-        $scope.msg = '';
+        var senderId = sessionStorage.getItem('UserID');
+        SocketService.on(senderId, function (message) {
+            console.log('Message emitted');
+            if (sessionStorage.getItem('receiverID') == message.senderId) 
+            {
+                if ($scope.msgData === undefined) 
+                    $scope.msgData = message;
+                else{ 
+                    $scope.msgData.push(message); 
+                }     
+            }
+        })
+
+        $scope.clearTextArea = function () {
+            $scope.msg = '';
+        }
+
+        $scope.logout = function(){
+            $location.path('/login'); 
+        }
     }
-
-    $scope.logout = function(){
-        $location.path('/login'); 
+    catch(err)
+    {
+        console.log('Error: ',err);    
     }
 
 })

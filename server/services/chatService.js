@@ -1,10 +1,10 @@
 const chatModels = require('../models/chatModel')
 
 
-class ChatService{
-
-    sendMsgService(msgData,callback){
-        
+class ChatService
+{
+    sendMsgService(msgData,callback)
+    {    
         chatModels.sendMsg(msgData,(err,data)=>
         {
             if(err)
@@ -17,7 +17,8 @@ class ChatService{
 
     getMsgService(req,callback)
     {
-                
+     try
+     {           
         chatModels.getMsg(req,(err,data)=>
         {
             if(err)
@@ -26,6 +27,12 @@ class ChatService{
                 callback(null,data)
                 
         });
+    }
+    catch(err)
+    {
+        console.log('Error: ',err); 
+    }
+    
 
     }
 

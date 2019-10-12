@@ -28,32 +28,46 @@ class chatModel
 {
     sendMsg(body,callback)
     {   
-        const message = new Message({
-            senderName:body.senderName,
-            sender_id:body.senderId,
-            receiverName:body.receiverName,
-            receiver_id:body.receiverId,
-            message:body.message
-        })
-        message.save((err,data)=>
+        try
         {
-            if(err)
-                callback(err)
-            else
-                callback(null,data)
-        })
+            const message = new Message({
+                senderName:body.senderName,
+                sender_id:body.senderId,
+                receiverName:body.receiverName,
+                receiver_id:body.receiverId,
+                message:body.message
+            })
+            message.save((err,data)=>
+            {
+                if(err)
+                    callback(err)
+                else
+                    callback(null,data)
+            })
+        }
+        catch(err)
+        {
+            console.log('Error: ',err);
+        }
     }
 
     getMsg(body,callback)
     {
-        Message.find((err,data)=>{
-            if(err)
-                callback(err)
-            else{
-                callback(null,data)
-            }
-                
-        })
+        try
+        {
+            Message.find((err,data)=>{
+                if(err)
+                    callback(err)
+                else{
+                    callback(null,data)
+                }
+                    
+            })
+        }
+        catch(err)
+        {
+            console.log('Error: ',err);
+        }
     }
 }
 
