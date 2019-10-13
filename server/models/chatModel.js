@@ -1,4 +1,19 @@
+/**
+* @description: 
+* @file: chatModel.js
+* @author: Vedant Nare
+* @version: 1.0
+*/ 
+
+/**
+*@description Dependencies are installed for execution. 
+*/
+
 const mongoose = require('mongoose');
+
+/**
+*@description Schema is defined for storing object in database. 
+*/
 
 const messageSchema = mongoose.Schema({
     senderName: {
@@ -26,7 +41,7 @@ const Message =  mongoose.model('message',messageSchema);
 
 class chatModel
 {
-    sendMsg(body,callback)
+    sendMessage(body,callback)
     {   
         try
         {
@@ -37,6 +52,11 @@ class chatModel
                 receiver_id:body.receiverId,
                 message:body.message
             })
+
+            /**
+            *@description save method is used for saving message in database. 
+            */ 
+
             message.save((err,data)=>
             {
                 if(err)
@@ -51,10 +71,14 @@ class chatModel
         }
     }
 
-    getMsg(body,callback)
+    getMessage(body,callback)
     {
         try
         {
+            /**
+            *@description find method is used for retreiving whole list of objects from database. 
+            */ 
+
             Message.find((err,data)=>{
                 if(err)
                     callback(err)

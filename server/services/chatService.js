@@ -1,11 +1,21 @@
-const chatModels = require('../models/chatModel')
+/**
+* @description: 
+* @file: chatController.js
+* @author: Vedant Nare
+* @version: 1.0
+*/ 
 
+/**
+*@description Dependencies are installed for execution. 
+*/ 
+
+const chatModels = require('../models/chatModel')
 
 class ChatService
 {
-    sendMsgService(msgData,callback)
+    sendMessage(body,callback)
     {    
-        chatModels.sendMsg(msgData,(err,data)=>
+        chatModels.sendMessage(body,(err,data)=>
         {
             if(err)
                 callback(err)
@@ -14,26 +24,23 @@ class ChatService
         })
     }
 
-
-    getMsgService(req,callback)
+    getMessage(req,callback)
     {
-     try
-     {           
-        chatModels.getMsg(req,(err,data)=>
+        try
+        {           
+            chatModels.getMessage(req,(err,data)=>
+            {
+                if(err)
+                    callback(err)
+                else
+                    callback(null,data)
+                    
+            });
+        }
+        catch(err)
         {
-            if(err)
-                callback(err)
-            else
-                callback(null,data)
-                
-        });
-    }
-    catch(err)
-    {
-        console.log('Error: ',err); 
-    }
-    
-
+            console.log('Error: ',err); 
+        }
     }
 
 

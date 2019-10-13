@@ -1,3 +1,4 @@
+
 /* User Interface Style */
 
 a{
@@ -52,7 +53,7 @@ span{
 
 /* Chat Style */
 
-.hstyle{
+.user{
     color:rgb(23, 72, 233);
     padding: 1px;
 }
@@ -68,21 +69,21 @@ span{
 .flex {
     display: flex
 }
-.sidebar {
+.listbox {
     width: 15%;
     margin-top: 2.5%;
     height: 530px;
     overflow-y: scroll;
     float: left;
 }
-.msgspace {
+.chatDisplay {
     background-image: url('../images/chatbackground.png');
     width: 900px;
     height: 450px;
     overflow-y: auto; 
     overflow-x: hidden; 
 }
-.sendbox {
+.messageArea {
     border: 1px solid black;
     position: absolute;
     width: 900px;
@@ -91,7 +92,7 @@ span{
     height: 78px;
     margin-bottom: 0;
 }
-.inputbox{
+.messageBox{
     height:50px;
     width: 750px;
     /* margin-top: 0;
@@ -99,7 +100,7 @@ span{
     margin-bottom: 0; */
 
 }
-.sendButton{
+.sendMessage{
     height:50px;
     width: 100px;
     color: darkgreen;
@@ -107,14 +108,14 @@ span{
     margin-bottom: 0;
 }
 
-.userButton{
+.list-item{
     margin-top: 2%;
     background-color:yellow;
     width: 100px;
     height:40px;
 }
 
-.rtext{
+.receivedText{
     background-color: red;
     float: right;
     word-wrap: break-word;
@@ -124,7 +125,7 @@ span{
     text-indent: 8px;
 }
 
-.ltext{
+.sendtext{
     background-color: yellow;
     word-wrap: break-word;
     float:left;
@@ -133,6 +134,7 @@ span{
     font-size: larger;
     text-indent: 8px;
 }
+
 .receiver{
     margin-bottom: 0;
     margin-left:192px;
@@ -148,7 +150,7 @@ span{
     background-color: aquamarine;
 }
 
-.whole
+.chatapp
 {
     background-color: khaki;
     height: 650px;

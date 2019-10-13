@@ -1,12 +1,32 @@
+/**
+* @description: 
+* @file: userController.js
+* @author: Vedant Nare
+* @version: 1.0
+*/ 
+
+/**
+*@description Dependencies are installed for execution. 
+*/ 
+
 require('dotenv').config();
 const service = require('../services/userService');
 const auth = require('../auth/auth');
 
-class UserController {
+class UserController 
+{
+    /**
+    *@description Register function is used for user registration. 
+    */
+
     register(req, res) 
     {
         try
         {
+            /**
+            * @description express-validator is used for validation of input. 
+            */ 
+
             req.check('email','Invalid email').isEmail();
             req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
             const errors = req.validationErrors();
@@ -27,10 +47,18 @@ class UserController {
         
     }
 
+    /**
+    *@description Login function is used for user login. 
+    */
+
     login(req,res)
     {
         try
         {
+            /**
+            * @description express-validator is used for validation of input. 
+            */
+
             req.check('email','Invalid email').isEmail();
             req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
             const errors = req.validationErrors();
@@ -62,10 +90,18 @@ class UserController {
         }        
     }
 
+    /**
+    *@description Forgot Password api is used for resetting user password. 
+    */
+
     forgot(req, res) 
     {
         try
         {
+            /**
+            * @description express-validator is used for validation of input. 
+            */
+
             req.check('email','Invalid email').isEmail();
             const errors = req.validationErrors();
             if (errors) 
@@ -76,6 +112,10 @@ class UserController {
                     res.status(422).send(err);
                 else
                 {   
+                    /**
+                    * @description Token is generated and stored in a variable
+                    */
+
                     let payload = {email:data.email},
                     result = auth.generateToken(payload),
                     req={
@@ -103,10 +143,18 @@ class UserController {
         
     }
 
+    /**
+    *@description Reset Password api is used for storing new password. 
+    */
+
     reset(req, res) 
     {
         try
         {
+            /**
+            * @description express-validator is used for validation of input. 
+            */
+
             req.check('password','Invalid password').isLength({ min: 6 }).isAlphanumeric();
             req.check('password_new','Invalid password').isLength({ min: 6 }).isAlphanumeric();
             const errors = req.validationErrors();
@@ -131,6 +179,10 @@ class UserController {
         } 
        
     }
+
+    /**
+    *@description Get all users api is used for retreiving list of registered users. 
+    */
 
     getAllUsers(req,res)
     {

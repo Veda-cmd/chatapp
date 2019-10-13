@@ -1,31 +1,31 @@
     <!------------------ Chat Template --------------------->
 
-<div class="whole">
-    <div class="hstyle">
+<div class="chatapp">
+    <div class="user">
         <nav>
             <ul>
                 <button class="logout" ng-click="logout()" ui-sref="login">LogOut</button>
-                <li class="logout"><b>{{currUser}}</b></li>
+                <li class="logout"><b>{{loggedUser}}</b></li>
             </ul>
         </nav>
     </div>
-    <div class="sidebar">
-        <ul ng-repeat="item in users" ng-click="getUser(item)" ng-show='currUser != item.firstName'>
-            <button class="userButton" type="submit">{{item.firstName}}</button>
+    <div class="listbox">
+        <ul ng-repeat="item in users" ng-click="getUser(item)" ng-show='loggedUser != item.firstName'>
+            <button class="list-item" type="submit">{{item.firstName}}</button>
         </ul>
     </div>
-    <p class="receiver"><b>{{receiverName}}</b></p> 
+    <p class="receiver"><b>{{receiver}}</b></p> 
     <div class="flex">
-        <div class="msgspace" id='message'>
-            <div ng-repeat="y in msgData">  
-                <span class="rtext" ng-show="currUserId == y.sender_id">{{y.message}}</span><br>
-                <span class="ltext" ng-show="currUserId != y.sender_id">{{y.message}}</span><br>   
+        <div class="chatDisplay">
+            <div ng-repeat="person in messageData">  
+                <span class="receivedText" ng-show="loggedUserId == person.sender_id">{{person.message}}</span><br>
+                <span class="sendText" ng-show="loggedUserId != person.sender_id">{{person.message}}</span><br>   
             </div>
         </div>
     </div>
-    <div class="sendbox">
-        <input class="inputbox" type="text" id="message" ng-model="msg" name="msg" placeholder="Type your message...">
-        <button ng-click="sendMsg(msg);clearTextArea()" class="sendButton">Send</button>  
+    <div class="messageArea">
+        <input class="messageBox" type="text" ng-model="message" name="message" placeholder="Type your message...">
+        <button ng-click="sendUserMessage(message);reset()" class="sendMessage">Send</button>  
     </div>
 </div>
 

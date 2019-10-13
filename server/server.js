@@ -1,3 +1,14 @@
+/**
+* @description: 
+* @file: server.js
+* @author: Vedant Nare
+* @version: 1.0
+*/ 
+
+/**
+*@description Dependencies are installed for execution. 
+*/
+
 const express = require('express');
 const expressValidator = require('express-validator');
 // create express app
@@ -8,6 +19,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const controller = require('./controllers/chatController');
 const route = require('./routes/routes')
+
 //enables CORS
 app.use(cors({
     'allowedHeaders': ['sessionId', 'Content-Type'],
@@ -25,6 +37,8 @@ app.use(bodyParser.json())
 app.use(expressValidator())
 app.use(express.static('../client'))
 
+// Connecting to the socket
+
 io.on('connection', function(client) 
 {
     console.log("User connected");
@@ -35,14 +49,14 @@ io.on('connection', function(client)
     //     console.log(' Client joined the room and client id is '+ client.id);
     // });
 
-    client.on('newMsg',(message)=>
+    client.on('send',(message)=>
     {
-        controller.sendMsgControl(message,(err,data)=>
+        controller.sendMessage(message,(err,data)=>
         {        
             if(err) 
-                return err   
+                return err;   
             else     
-                return data 
+                return data;
         })    
         io.emit(String(message.receiverId),message);
     })
@@ -59,6 +73,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
+
 mongoose.connect(config.url, {
     useNewUrlParser: true
 }).then(() => {

@@ -1,7 +1,19 @@
+/**
+* @description: 
+* @file: userService.js
+* @author: Vedant Nare
+* @version: 1.0
+*/
+
+/**
+*@description Dependencies are installed for execution. 
+*/
+
 const userModel = require('../models/userModel');
 var nodemailer = require('nodemailer');
 
-class UserService {
+class UserService 
+{
     register(body, callback) {
         userModel.create(body, (err, data) => {
             if (err) {
@@ -55,6 +67,10 @@ class UserService {
                 callback(null, data);
         })
     }
+
+    /**
+    * @description sendLink is used for sending mail to recipient using nodemailer.
+    */ 
 
     sendLink(url,req)
     {

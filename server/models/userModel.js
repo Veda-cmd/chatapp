@@ -1,3 +1,14 @@
+/**
+* @description: 
+* @file: userModel.js
+* @author: Vedant Nare
+* @version: 1.0
+*/ 
+
+/**
+*@description Dependencies are installed for execution. 
+*/
+
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
@@ -15,6 +26,9 @@ MongoClient.connect(url, function(err, client) {
   collection = db.collection('users'); 
 });
 
+/**
+*@description Schema is defined for storing object in database. 
+*/
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -49,7 +63,17 @@ const userSchema = mongoose.Schema({
 });
 const User =  mongoose.model('user',userSchema);
 
-class UserModel{
+/**
+*@description UserModel has the following functions:
+* create: for storing user object in database. bcrypt hash method is used for hashing password. 
+* login: for checking user credentials are valid or not. bcrypt compare method is used for verifying hashed password.
+* forgot : for checking whether user exists or not. UpdateToken is used for storing token if user exists.
+* reset: for storing new password in database.
+* getAllUsers : for retreiving list of registered users from database. 
+*/ 
+
+class UserModel
+{
     create(body, callback)
     {
         collection.findOne({email:body.email},(err,result)=>

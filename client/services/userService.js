@@ -1,5 +1,16 @@
+/**
+ * @description: 
+ * @file: userService.js
+ * @author: Vedant Nare
+ * @version: 1.0
+ */
+
 app.service('userService',function($http)
 {
+    /**
+    *@description login service is used to check whether credentials are correct or not. 
+    */ 
+
    this.login = (data) =>
    {
     return $http({
@@ -8,6 +19,10 @@ app.service('userService',function($http)
         data: data
     });
    }
+
+    /**
+    *@description register service is used to for user registration. 
+    */
 
    this.register = (data) =>
    {
@@ -18,6 +33,10 @@ app.service('userService',function($http)
     });
    }
 
+    /**
+    *@description forgot password service is used for resetting user password. 
+    */
+
    this.forgotPassword = (data) =>
    {
     return $http({
@@ -27,6 +46,10 @@ app.service('userService',function($http)
     });   
    }
 
+    /**
+    *@description reset password service is used for storing new password. 
+    */
+
    this.resetPassword = (data) =>
    {
     return $http({
@@ -35,6 +58,10 @@ app.service('userService',function($http)
         data: data
     });   
    }
+
+   /**
+    *@description To get list of registered users for chat template. 
+    */
 
    this.getAllUsers = () =>
    {

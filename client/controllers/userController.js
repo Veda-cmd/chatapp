@@ -1,5 +1,20 @@
+/**
+ * @description: 
+ * @file: userController.js
+ * @author: Vedant Nare
+ * @version: 1.0
+ */
+
+/**
+ * @description regex pattern is used for validation for input.
+ */  
+
 var emailPattern =/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm,
-    passwordPattern = /^[a-zA-Z0-9]{6,30}$/;
+   passwordPattern = /^[a-zA-Z0-9]{6,30}$/;
+
+/**
+ * @description login function is run from here.
+ */ 
 
 app.controller("loginController", function($scope,$window,userService)
 { 
@@ -34,6 +49,10 @@ app.controller("loginController", function($scope,$window,userService)
    }
 
 });
+
+/**
+ * @description register function is run from here.
+ */
 
 app.controller("registerController", function($scope,$window,userService)
 {
@@ -70,6 +89,10 @@ app.controller("registerController", function($scope,$window,userService)
    }
 });
 
+/**
+ * @description Forgot Password function is run from here.
+ */
+
 app.controller("forgotController", function($scope,userService)
 {
    try
@@ -98,6 +121,10 @@ app.controller("forgotController", function($scope,userService)
       console.log('Error: ',err);
    }
 });
+
+/**
+ * @description Reset password function is run from here.
+ */
 
 app.controller("resetController", function($scope,$stateParams,userService)
 {

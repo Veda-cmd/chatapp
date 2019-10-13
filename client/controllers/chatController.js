@@ -1,11 +1,27 @@
+/**
+ * @description: 
+ * @file: chatController.js
+ * @author: Vedant Nare
+ * @version: 1.0
+ */ 
+
 app.controller('chatController', function($scope,$location,chatService,userService,SocketService) 
 {
     try
     {
+        /**
+        *@description variables are initialized and are assigned values.
+        */
+
         let messagePattern = /^[\w+\s+]{1,}$/;
-        $scope.msgData = [];
-        $scope.currUser = sessionStorage.getItem('Username');
-        $scope.currUserId=sessionStorage.getItem('UserID');
+        $scope.messageData = [];
+        $scope.loggedUser = sessionStorage.getItem('Username');
+        $scope.loggedUserId = sessionStorage.getItem('UserID');
+        $scope.receiver = sessionStorage.getItem('receiverName')
+
+        /**
+        *@description getUser function is used for getting history of user chat. 
+        */ 
 
         $scope.getUser = (item) =>
         {
@@ -13,19 +29,30 @@ app.controller('chatController', function($scope,$location,chatService,userServi
             sessionStorage.setItem('receiverName',item.firstName);
             $scope.getUserMessage();
         }
-    ,
+    
         $scope.getUserMessage = function () {
-            chatService.getUserMsg($scope);
+            chatService.getMessages($scope);
             
         }
 
+        /**
+         * @description To set the scrollbar to bottom once messages are loaded.
+         */ 
+
         $scope.updateScroll = function(){
-            var element = document.querySelector('.msgspace');
-            element.scrollTop = element.scrollHeight;
-            console.log('Success',element.scrollTop);  
+            document.querySelector('.chatDisplay').addEventListener('click',()=>
+            {
+                var element = document.querySelector('.chatDisplay');
+                element.scrollTop = element.scrollHeight;
+                console.log('Success',element.scrollTop); 
+            })
         }
 
         // chatService.emit('room', { roomId: $scope.id});
+
+        /**
+         * @description To get list of users registered.
+         */
 
         userService.getAllUsers().
         then(res=>
@@ -37,37 +64,51 @@ app.controller('chatController', function($scope,$location,chatService,userServi
                 console.log(err);
             });
         
-        $scope.sendMsg = function() {
-            if(!messagePattern.test($scope.msg))
+        /**
+         * @description To load the message in database and display to the current user.
+         */
+
+        $scope.sendUserMessage = function() 
+        {
+            if(!messagePattern.test($scope.message))
                 return;
-            let sendMsgData={
+            
+            let sendMessage={
             senderName : sessionStorage.getItem('Username'),
             sender_id : sessionStorage.getItem('UserID'),
             receiverName : sessionStorage.getItem('receiverName'),
             receiver_id : sessionStorage.getItem('receiverID'),
-            message:$scope.msg
+            message:$scope.message
             }
-            SocketService.emit("newMsg", sendMsgData);
-            $scope.msgData.push(sendMsgData);
-        
+
+            SocketService.emit("send", sendMessage);
+            $scope.messageData.push(sendMessage);
         }
 
         var senderId = sessionStorage.getItem('UserID');
         SocketService.on(senderId, function (message) {
-            console.log('Message emitted');
+            console.log('Message emitted',message);
             if (sessionStorage.getItem('receiverID') == message.senderId) 
             {
-                if ($scope.msgData === undefined) 
-                    $scope.msgData = message;
+                if ($scope.messageData === undefined) 
+                    $scope.messageData = message;
                 else{ 
-                    $scope.msgData.push(message); 
+                    $scope.messageData.push(message); 
                 }     
             }
         })
 
-        $scope.clearTextArea = function () {
-            $scope.msg = '';
+        /**
+         * @description To clear input field after message is sent.
+         */
+
+        $scope.reset = function () {
+            $scope.message = '';
         }
+
+        /**
+         * @description To redirect to login page
+         */
 
         $scope.logout = function(){
             $location.path('/login'); 
