@@ -4,20 +4,61 @@
 a{
     padding:15px;
     background-color: gold;
-    /* background:#ccc;  */
     border:0 none;
     cursor:pointer;
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; 
 }
 
 .login, .register, .reset, .forgot{
     padding: 0;
     margin-top: 50px;
     text-align: center; 
+}
+
+.login{
+    border: 1px solid black;
+    padding: 15px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: lightslategray;
+}
+
+.register{
+    border: 1px solid black;
+    padding: 15px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: lightslategray;
+}
+
+.forgot{
+    border: 1px solid black;
+    padding: 15px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: lightslategray;
+}
+
+.reset{
+    border: 1px solid black;
+    padding: 15px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: lightslategray;
+}
+
+.head{
+    color: darkblue;
 }
 
 input {
@@ -34,8 +75,8 @@ input:focus {
 
 button{
     padding:15px 25px;
-    margin-top: 5px;
-    background:#ccc; 
+    margin-top: 15px;
+    background-color: darkolivegreen; 
     border:0 none;
     cursor:pointer;
     text-decoration: none;
@@ -56,32 +97,65 @@ span{
 .user{
     color:rgb(23, 72, 233);
     padding: 1px;
+    
 }
 
 .logout{
-    float: right;
     list-style-type:none;
     font: outline;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: medium;
-    padding-right: 15px;
+    margin-right: 20px;
 }
+
+/* .image
+{
+    height:90px;
+    margin-top: 3%; 
+    margin-right: 30px;
+} */
+
+.current{
+margin-right: 50px;
+margin-top: 0;
+}
+
+.logout,.current{
+    float: right;
+    clear: right;
+    
+}
+
 .flex {
     display: flex
 }
+
+.list{
+    margin-left: 50px;
+}
+
 .listbox {
     width: 15%;
-    margin-top: 2.5%;
-    height: 530px;
+    margin-top: 0;
+    height: 450px;
     overflow-y: scroll;
-    float: left;
 }
+
+.list,.listbox{
+    float: left;
+    clear: left; 
+}
+
 .chatDisplay {
     background-image: url('../images/chatbackground.png');
     width: 900px;
     height: 450px;
     overflow-y: auto; 
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px; 
 }
 .messageArea {
     border: 1px solid black;
@@ -103,19 +177,21 @@ span{
 .sendMessage{
     height:50px;
     width: 100px;
-    color: darkgreen;
+    background-color: darkslategrey;
+    color: floralwhite;
     text-align: center;
     margin-bottom: 0;
 }
 
 .list-item{
     margin-top: 2%;
-    background-color:yellow;
+    background-color:orange;
     width: 100px;
     height:40px;
+    text-indent: 1px;
 }
 
-.receivedText{
+.sendText{
     background-color: red;
     float: right;
     word-wrap: break-word;
@@ -125,7 +201,7 @@ span{
     text-indent: 8px;
 }
 
-.sendtext{
+.receivedText{
     background-color: yellow;
     word-wrap: break-word;
     float:left;
@@ -147,6 +223,8 @@ span{
     text-indent: 10px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px; 
     background-color: aquamarine;
 }
 

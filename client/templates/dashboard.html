@@ -2,13 +2,13 @@
 
 <div class="chatapp">
     <div class="user">
-        <nav>
-            <ul>
-                <button class="logout" ng-click="logout()" ui-sref="login">LogOut</button>
-                <li class="logout"><b>{{loggedUser}}</b></li>
-            </ul>
-        </nav>
+        <div>
+            <!-- <img class="image" src="../images/profile.png" alt="Profile Image"> -->
+            <p class="current"><b>{{loggedUser}}</b></p>
+            <button class="logout" ng-click="logout()" ui-sref="login">LogOut</button>
+        </div>
     </div>
+    <p class="list"><b>List of Users</b></p>
     <div class="listbox">
         <ul ng-repeat="item in users" ng-click="getUser(item)" ng-show='loggedUser != item.firstName'>
             <button class="list-item" type="submit">{{item.firstName}}</button>
@@ -18,8 +18,8 @@
     <div class="flex">
         <div class="chatDisplay">
             <div ng-repeat="person in messageData">  
-                <span class="receivedText" ng-show="loggedUserId == person.sender_id">{{person.message}}</span><br>
-                <span class="sendText" ng-show="loggedUserId != person.sender_id">{{person.message}}</span><br>   
+                <span class="sendText" ng-show="loggedUserId == person.sender_id">{{person.message}}</span><br>
+                <span class="receivedText" ng-show="loggedUserId != person.sender_id">{{person.message}}</span><br>   
             </div>
         </div>
     </div>

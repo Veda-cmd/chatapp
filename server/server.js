@@ -57,8 +57,10 @@ io.on('connection', function(client)
                 return err;   
             else     
                 return data;
-        })    
-        io.emit(String(message.receiverId),message);
+        })
+        // console.log(message);
+            
+        io.emit(message.receiver_id,message);
     })
     io.on('disconnect', (client) => {
         console.log("socket disconnected");

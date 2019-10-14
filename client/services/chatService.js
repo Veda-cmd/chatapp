@@ -28,7 +28,7 @@ app.service('chatService',function($http)
             receiverId = sessionStorage.getItem('receiverID');         
     
             /** 
-            *@description for loop is used fo filte out receiver and sender messages 
+            *@description for loop is used fo filter out receiver and sender messages 
             */
 
             for(let i=0; i<response.data.result.length;i++)
