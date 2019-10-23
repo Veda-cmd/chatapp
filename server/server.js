@@ -61,11 +61,11 @@ io.on('connection', function(client)
         // console.log(message);
             
         io.emit(message.receiver_id,message);
-    })
-    io.on('disconnect', (client) => {
-        console.log("socket disconnected");
-    })
+    }) 
 })
+ io.on('disconnect', (client) => {
+        console.log("socket disconnected");
+ })
 
 app.use('/',route)
 
